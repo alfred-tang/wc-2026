@@ -1,0 +1,113 @@
+:root {
+    --team-ca: 213, 43, 30;
+    --team-us: 3, 38, 222;
+    --team-mx: 39, 165, 80;
+    --team-dz: 0, 160, 103;
+    --team-ar: 156, 201, 242;
+    --team-au: 255, 193, 0;
+    --team-at: 237, 61, 50;
+    --team-be: 136, 0, 41;
+    --team-br: 255, 207, 37;
+    --team-cv: 34, 46, 119;
+    --team-co: 255, 214, 0;
+    --team-hr: 243, 10, 10;
+    --team-cw: 35, 108, 218;
+    --team-ci: 255, 138, 0;
+    --team-ec: 255, 214, 0;
+    --team-eg: 241, 5, 31;
+    --team-gb-eng: 255, 255, 255;
+    --team-fr: 0, 65, 143;
+    --team-de: 31, 31, 31;
+    --team-gh: 255, 193, 0;
+    --team-ht: 0, 19, 186;
+    --team-ir: 223, 24, 24;
+    --team-jp: 40, 48, 231;
+    --team-jo: 255, 26, 26;
+    --team-kr: 255, 37, 58;
+    --team-ma: 228, 0, 0;
+    --team-nl: 255, 122, 0;
+    --team-nz: 0, 0, 0;
+    --team-no: 199, 0, 0;
+    --team-pa: 228, 16, 39;
+    --team-py: 222, 0, 0;
+    --team-pt: 255, 0, 0;
+    --team-qa: 141, 27, 61;
+    --team-sa: 39, 165, 80;
+    --team-gb-sct: 30, 28, 113;
+    --team-sn: 255, 218, 23;
+    --team-za: 255, 214, 0;
+    --team-es: 255, 0, 0;
+    --team-ch: 226, 0, 0;
+    --team-tn: 233, 20, 38;
+    --team-uy: 126, 193, 255;
+    --team-uz: 17, 43, 179;
+    --team-ba: 39, 57, 215;
+    --team-cd: 0, 127, 255;
+    --team-cz: 255, 39, 39;
+    --team-iq: 13, 112, 83;
+    --team-se: 55, 126, 63;
+    --team-tr: 255, 255, 255;
+    --primary-gold: #BA9503;
+    --light-gold: #fff1ba;
+}
+
+body {
+    color: #333;
+    padding: 0;
+    margin: 0;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.transparent-card {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    border-radius: 10px 0px 10px 0px;
+}
+
+.button {
+    font-family: 'FWC2026 Normal';
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flag-container {
+    width: var(--flag-width, 72px);
+    aspect-ratio: 4 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flag-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: all 0.2s ease-out;
+}

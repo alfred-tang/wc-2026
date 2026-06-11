@@ -1,0 +1,123 @@
+.pot-container {
+    position: relative;
+    padding: 25px;
+    z-index: 1;
+}
+
+.pot-background {
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    transform: scaleY(0);
+    transform-origin: top;
+
+    transition: all 0.6s ease-out;
+    z-index: 0;
+}
+
+.pot-background.show {
+    transform: scaleY(1);
+}
+
+.pot {
+    font-family: "FWC2026 Normal", sans-serif;
+    font-size: 16px;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(-20px);
+    transform-origin: top;
+    transition: all 0.3s ease-out;
+}
+
+.pot-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: whitesmoke;
+}
+
+.pot.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.pot-teams {
+    font-family: "FWC2026 Normal", sans-serif;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: transparent;
+    position: relative;
+    border: none;
+    width: 100%;
+    margin: 20px 0px;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+}
+
+.pot-arrow {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    font-size: 2em;
+    color: whitesmoke;
+    opacity: 0;
+    transform: translate(50%, -50%) scale(0.5);
+    transition: all 0.2s ease-out;
+}
+
+.pot-teams:hover {
+    border-radius: 10px 0px 10px 0px;
+    position: relative;
+    background: linear-gradient(45deg, lightcyan 0%, indianred 50%, royalblue 100%);
+    background-size: 200% 200%;
+    animation: gradient-aurora 6s ease alternate infinite;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+}
+
+.pot-teams:hover .pot-arrow {
+    opacity: 1;
+    transform: translate(50%, -50%) scale(1.2);
+}
+
+.pot-teams:disabled {
+    cursor: not-allowed;
+    background: transparent;
+}
+
+.close-pots-btn {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: 1.25em;
+    transition: all 0.2s ease-out;
+    color: whitesmoke;
+}
+
+.close-pots-btn:hover {
+    color: darkgrey;
+}
+
+@keyframes gradient-aurora {
+    0% {
+        background-position: 0% 50%;
+        filter: brightness(100%) saturate(100%);
+    }
+    25% {
+        background-position: 50% 0%;
+        filter: brightness(110%) saturate(120%);
+    }
+    50% {
+        background-position: 100% 50%;
+        filter: brightness(120%) saturate(140%);
+    }
+    75% {
+        background-position: 50% 100%;
+        filter: brightness(110%) saturate(120%);
+    }
+    100% {
+        background-position: 0% 50%;
+        filter: brightness(100%) saturate(100%);
+    }
+}

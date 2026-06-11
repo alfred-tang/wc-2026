@@ -1,0 +1,9 @@
+main {
+    position: relative;
+    margin: 0px;
+    padding: 125px 100px 25px 100px;
+    background-image: linear-gradient(to bottom, transparent 65%, whitesmoke 100%), url("/assets/filter/grain.svg"), url("/assets/tournament/messi-2.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}

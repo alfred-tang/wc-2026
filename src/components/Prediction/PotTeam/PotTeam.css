@@ -1,0 +1,33 @@
+.pot-team {
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(var(--color-hover), 0.6);
+    margin: 10px;
+    transition: all 0.2s ease-out;
+}
+
+.pot-team.disabled {
+    opacity: 0.35;
+    filter: grayscale(100%);
+    pointer-events: none;
+}
+
+.pot-teams:hover .pot-team {
+    opacity: 0;
+}
+
+.pot-gb-eng,
+.pot-br,
+.pot-sn,
+.pot-co,
+.pot-ec,
+.pot-za,
+.pot-tr {
+    color: black;
+}

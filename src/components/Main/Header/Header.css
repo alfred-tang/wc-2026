@@ -1,0 +1,158 @@
+header {
+    position: fixed;
+    inset: 0 0 auto;
+    width: 100%;
+    z-index: 10;
+}
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    height: 80px;
+    padding: 10px;
+
+    background: transparent;
+    box-shadow: none;
+
+    transition: box-shadow 0.4s ease;
+}
+
+.header.shrink {
+    box-shadow: 0 3px 5px rgba(0,0,0,.4);
+}
+
+/* LINKS */
+
+.header-link {
+    position: relative;
+
+    margin: 0 15px;
+
+    font: bold 12px "FWC2026 SemiExpanded", sans-serif;
+    text-decoration: none;
+    color: whitesmoke;
+
+    transition: .2s ease-out;
+}
+
+.header-link.active {
+    color: var(--color-hover);
+}
+
+.header.shrink .header-link {
+    color: #333;
+}
+
+.header.shrink .header-link.active {
+    color: var(--color-hover);
+}
+
+.header:has(.header-link:hover) .header-link:not(:hover) {
+    color: darkgray;
+}
+
+.header-link::after {
+    content: "";
+
+    display: block;
+    width: 0;
+    height: 1px;
+
+    background: currentColor;
+    border-radius: 10px;
+
+    transition: .2s ease-out;
+}
+
+.header-link:hover::after {
+    width: 100%;
+}
+
+/* LOGO */
+
+.logo-container,
+.logo-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-container {
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+
+#world-cup-logo,
+.logo-background {
+    height: 60px;
+    width: auto;
+
+    transition: .2s ease-out;
+}
+
+#world-cup-logo {
+    position: relative;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.logo-background {
+    position: absolute;
+    overflow: hidden;
+
+    clip-path: inset(0);
+    z-index: 0;
+}
+
+.header.shrink .logo-background {
+    clip-path: inset(100% 0 0);
+}
+
+/* BACKGROUND */
+
+.header-background {
+    position: absolute;
+    inset: 0;
+
+    background-color: whitesmoke;
+
+    transform: scaleY(0);
+    transform-origin: top;
+
+    transition: transform .2s ease-out;
+    z-index: 0;
+}
+
+.header-background.shrink {
+    transform: scaleY(1);
+}
+
+.sign-out-button {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.25em;
+    color: whitesmoke;
+    transition: color 0.2s ease-out;
+}
+
+.header.shrink .sign-out-button {
+    color: #333;
+}
+
+.sign-out-button:hover {
+    filter: brightness(80%);
+}
+
+.header.shrink .sign-out-button:hover {
+    filter: brightness(80%);
+}

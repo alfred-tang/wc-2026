@@ -1,0 +1,239 @@
+.header-board.fullscreen {
+    font-size: 1.4em;
+}
+
+.team-board {
+    scroll-behavior: smooth;
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    transition: all 0.3s ease;
+}
+
+.team-board.editable {
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+
+.team-board.fullscreen {
+    font-size: 1.4em;
+}
+
+.team-board td,
+.team-board th {
+    padding: 12px;
+    vertical-align: middle;
+}
+
+.team-board tr {
+    border-bottom: 1px solid #333;
+    transition: all 0.3s ease;
+}
+
+.name-cell,
+.price-cell,
+.summary-cell {
+    font-weight: bold;
+}
+
+.price-cell,
+.summary-cell {
+    text-align: right;
+}
+
+.team-cell {
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.team-cell::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: rgba(220, 20, 60, 0.12);
+
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+
+    pointer-events: none;
+}
+
+.team-cell:has(.delete-team-btn:hover)::before {
+    transform: translateX(0);
+}
+
+.team-cell:has(.delete-team-btn:hover) {
+    color: firebrick;
+}
+
+.team-cell.editable {
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+}
+
+.team-cell.editable:hover {
+    box-shadow: none;
+    background: lightgrey;
+}
+
+.team-cell.selected {
+    background: steelblue;
+    color: white;
+    box-shadow:
+        0 0 0 2px rgba(255,255,255,.4),
+        0 0 16px rgba(70,130,180,.4);
+}
+
+.team-cell.pending {
+    background:
+        repeating-linear-gradient(
+            -45deg,
+            rgba(70,130,180,.08),
+            rgba(70,130,180,.08) 8px,
+            rgba(70,130,180,.16) 8px,
+            rgba(70,130,180,.16) 16px
+        );
+
+    background-size: 200% 200%;
+
+    animation: pendingMove 4s linear infinite;
+}
+
+.team-cell.same-pot {
+    background-color: rgba(120, 120, 120, 0.4);
+}
+
+.board-team-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.edit-controls {
+    left: 25px;
+    display: flex;
+    gap: 10px;
+}
+
+.edit-controls > * {
+    padding: 0px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+}
+
+.edit-controls > *:hover {
+    filter: brightness(1.25);
+}
+
+.cancel-btn {
+    color: crimson;
+}
+
+.accept-btn {
+    gap: 5px;
+    color: green;
+}
+
+.accept-btn > span {
+    font-size: 0.7em;
+}
+
+.summary-row {
+    border: none !important;
+}
+
+.controller {
+    position: absolute;
+    top: 25px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    background: none;
+
+    padding: 0px;
+    font-size: 1.2em;
+    transition: all 0.2s ease-out;
+}
+
+.edit-button {
+    left: 25px;
+    transition: all .3s ease;
+}
+
+.full-screen-button {
+    right: 25px;
+}
+
+.full-screen-button:hover,
+.edit-button:hover {
+    color: #666;
+}
+
+.edit-button:hover {
+    transform: rotate(45deg);
+}
+
+.delete-team-btn {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    opacity: 0;
+    color: firebrick;
+
+    border: none;
+    background-color: transparent;
+    padding: 0px;
+
+    cursor: pointer;
+
+    transform: translateX(10px) scale(0.8);
+    transition: all 0.25s ease;
+
+    pointer-events: none;
+}
+
+.team-cell:hover .delete-team-btn {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+
+    pointer-events: auto;
+}
+
+.delete-team-btn:hover {
+    filter: brightness(1.25);
+}
+
+.team-board:not(.editable) .delete-team-btn {
+    display: none;
+}
+
+@keyframes pendingMove {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 100px 0;
+    }
+}

@@ -1,0 +1,112 @@
+.auth-background {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    background-image: linear-gradient(to bottom, transparent 20%, whitesmoke 100%), url("/assets/filter/grain.svg");
+}
+
+.background-video {
+    position: fixed;
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.video-button {
+    cursor: pointer;
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    top: 20px;
+    right: 20px;
+
+    width: 2rem;
+    height: 2rem;
+    padding: 0.5em;
+
+    background: rgba(255, 255, 255, 0.25);
+
+    backdrop-filter: blur(10px);
+
+    color: whitesmoke;
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+
+    transition: all 0.2s ease;
+}
+
+.video-button:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.login-container {
+    font-family: "FWC2026 Normal", sans-serif;
+    color: whitesmoke;
+    width: 400px;
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.welcome-board {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.welcome-board > #world-cup-logo {
+    height: 65px;
+    width: auto;
+}
+
+.welcome-board > h1 {
+    margin: 0px;
+}
+
+.auth-input {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.auth-input input {
+    font-family: "Geist", sans-serif;
+    font-weight: 200;
+    padding: 5px 10px;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 4px;
+    background-color: whitesmoke;
+}
+
+.auth-buttons {
+    font-size: 1.2em;
+    display: flex;
+    gap: 20px;
+}
+
+.auth-buttons button {
+    font-family: "FWC2026 Normal", sans-serif;
+    font-weight: 500;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #333;
+    color: whitesmoke;
+    cursor: pointer;
+    transition: background-color 0.2s ease-out;
+}
+
+.auth-buttons button:hover {
+    background-color: #555;
+}

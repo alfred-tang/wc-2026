@@ -1,0 +1,58 @@
+.match-row {
+    font-family: 'FWC2026 Normal', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    border-radius: 25px;
+    margin: 20px 0px;
+    padding: 20px 0px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 25px 0px 25px 0px !important;
+}
+
+.score-line {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.home {
+    justify-content: flex-end;
+}
+
+.away {
+    justify-content: flex-start;
+}
+
+.team-name {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
+
+.team-name > *:first-child {
+    margin-right: 15px;
+}
+
+.match-extra {
+    font-family: 'FWC2026 Condensed', sans-serif;
+    width: 15%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 18px;
+}
+
+.match-stadium {
+    font-family: 'FWC2026 Condensed', sans-serif;
+    display: flex;
+    gap: 8px;
+}
+
+.match-time {
+    font-size: 22px;
+    font-weight: 900;
+}

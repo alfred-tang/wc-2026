@@ -1,0 +1,68 @@
+.team-card {
+    box-sizing: border-box;
+    transition: all 0.2s ease-out;
+    cursor: pointer;
+}
+
+.team-card:not(:first-child) {
+    border-top: 2px solid whitesmoke;
+}
+
+.team-card:hover {
+    outline: 2px solid rgb(var(--color-hover));
+    color: white;
+    border: 2px solid white;
+}
+
+.team-card td {
+    padding: 25px;
+}
+
+.team-card:hover td {
+    background-color: rgb(var(--color-hover));
+}
+
+.team-col {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 400px;
+    font-weight: 900;
+}
+
+.team-col::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--background-image);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0;
+    transition: all 0.1s ease-out;
+}
+
+.team-card:hover .team-col::before {
+    opacity: 0.4;
+}
+
+.team-col > * {
+    vertical-align: middle;
+}
+
+.team-card:hover .flag-container img {
+    filter: drop-shadow(0px 0px 2px #333);
+    transform: scale(1.2);
+}
+
+.team-gb-eng:hover,
+.team-br:hover,
+.team-sn:hover,
+.team-co:hover,
+.team-ec:hover,
+.team-za:hover,
+.team-tr:hover {
+    color: black;
+    border: 2px solid black;
+}

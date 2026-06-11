@@ -1,0 +1,146 @@
+/* overlay */
+.drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 11;
+}
+
+.drawer-overlay.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* drawer */
+.drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 450px;
+
+    background: whitesmoke;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+
+    display: flex;
+    flex-direction: column;
+    z-index: 11;
+}
+
+.drawer.open {
+    transform: translateX(0);
+}
+
+/* header */
+.drawer-header {
+    padding: 40px 40px 20px 40px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.drawer-exit {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.25em;
+    transition: color 0.2s ease;
+}
+
+.drawer-exit:hover {
+    color: darkgrey;
+}
+
+/* content */
+.drawer-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 40px 40px 40px;
+}
+
+/* filter groups */
+.filter-group {
+    margin-bottom: 20px;
+}
+
+.filter-title {
+    width: 100%;
+    font-family: 'FWC2026 Normal', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #333;
+    padding: 5px 0px;
+    border-bottom: 1px solid #333;
+}
+
+/* items */
+.filter-item {
+    display: flex;
+    text-decoration: line-through;
+    align-items: center;
+    justify-content: space-between;
+    color: #666;
+    padding: 10px 0px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.filter-item:hover {
+    color: #D5B048;
+    padding: 10px 5px;
+    text-decoration: none;
+}
+
+.filter-item:hover .option-flag {
+    filter: grayscale(50%) brightness(100%);
+}
+
+.filter-item.active {
+    color: #333;
+    text-decoration: none;
+}
+
+h2 {
+    margin: 0;
+}
+
+/* footer */
+.drawer-footer {
+    display: flex;
+    gap: 20px;
+    padding: 20px 40px;
+}
+
+.drawer-footer button {
+    width: 100%;
+    font-family: 'FWC2026 Normal', sans-serif;
+    padding: 10px;
+    border-radius: 50px;
+    border: 2px solid #333;
+    background: whitesmoke;
+    color: #333;
+    cursor: pointer;
+}
+
+.drawer-footer button:hover {
+    filter: brightness(110%);
+}
+
+.apply-button {
+    background: #333 !important;
+    color: whitesmoke !important;
+}

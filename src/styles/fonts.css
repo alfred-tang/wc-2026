@@ -1,0 +1,71 @@
+@font-face {
+    font-family: 'FWC2026 UltraCondensed';
+    src: url('/fonts/FWC2026-UltraCondensedMedium.woff2') format('woff2'),
+        url('FWC2026-UltraCondensedMedium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FWC2026 UltraCondensed';
+    src: url('/fonts/FWC2026-UltraCondensedBold.woff2') format('woff2'),
+        url('/fonts/FWC2026-UltraCondensedBold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FWC2026 UltraCondensed';
+    src: url('/fonts/FWC2026-UltraCondensedBlack.woff2') format('woff2'),
+        url('/fonts/FWC2026-UltraCondensedBlack.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FWC2026 SemiExpanded';
+    src: url('/fonts/FWC2026-SemiExpandedBlack.woff2') format('woff2'),
+        url('/fonts/FWC2026-SemiExpandedBlack.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FWC2026 Normal';
+    src: url('/fonts/FWC2026-NormalRegular.woff2') format('woff2'),
+        url('/fonts/FWC2026-NormalRegular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FWC2026 Normal';
+    src: url('/fonts/FWC2026-NormalBlack.woff2') format('woff2'),
+        url('/fonts/FWC2026-NormalBlack.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FWC2026 Expanded';
+    src: url('/fonts/FWC2026-ExpandedBlack.woff2') format('woff2'),
+        url('/fonts/FWC2026-ExpandedBlack.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'FWC2026 Condensed';
+    src: url('/fonts/FWC2026-CondensedLight.woff2') format('woff2'),
+        url('FWC2026-CondensedLight.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}

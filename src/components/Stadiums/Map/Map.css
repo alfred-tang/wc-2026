@@ -1,0 +1,101 @@
+.map-container {
+    text-align: center;
+}
+
+.country {
+    stroke: grey;
+    stroke-width: 0.5;
+    fill: #2E526F;
+    transition: all 0.1s ease-out;
+}
+
+.ca-province:hover,
+.us-state:hover,
+.mx-state:hover {
+    stroke: #fff;
+    stroke-width: 1;
+}
+
+.ca-province:hover {
+    fill: rgb(var(--team-ca));
+}
+
+.us-state:hover {
+    fill: rgb(var(--team-us));
+}
+
+.mx-state:hover {
+    fill: rgb(var(--team-mx));
+}
+
+.stadium {
+    fill: rgb(var(--nation-color));
+    cursor: pointer;
+    stroke: #fff;
+    stroke-width: 1.5;
+    transition: all 0.1s ease;
+}
+
+.stadium:hover {
+    stroke-width: 2;
+}
+
+.stadium-img {
+    height: 150px;
+    width: 250px;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px 0px 10px 0px;
+}
+
+.stadium-info {
+    position: absolute;
+    text-shadow: 0px 0px 5px black;
+    bottom: 10px;
+    left: 10px;
+    width: 100%;
+}
+
+.flag-symbol {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 20px;
+    width: 38px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px 0px 5px 0px;
+}
+
+#map-tooltip {
+    font-family: "FWC2026 Condensed", sans-serif;
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    color: #fff;
+    padding: 8px 12px;
+
+    font-size: 13px;
+    line-height: 1.4;
+
+    transition: all 0.2s ease;
+    z-index: 9999;
+}
+
+#stadium-tooltip {
+    font-family: "FWC2026 Condensed", sans-serif;
+    display: flex;
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+
+    color: #fff;
+
+    font-size: 13px;
+    line-height: 1.4;
+
+    transition: all 0.2s ease;
+    z-index: 9999;
+}

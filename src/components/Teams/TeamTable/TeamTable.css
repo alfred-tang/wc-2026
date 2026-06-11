@@ -1,0 +1,25 @@
+.team-table {
+    font-family: "FWC2026 Normal", sans-serif;
+    width: 100%;
+    border-collapse: collapse;
+    box-sizing: border-box;
+}
+
+.team-table th {
+    padding: 20px;
+    font-weight: 900;
+    font-size: larger;
+    border-radius: 15px 0px 15px 0px !important;
+    transition: all 0.1s ease-out;
+    cursor: pointer;
+}
+
+.team-table th:active {
+    transform: scale(0.98);
+}
+
+.header-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
