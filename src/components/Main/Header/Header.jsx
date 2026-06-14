@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import { PiSignOutBold } from "react-icons/pi";
+import { PiSignOutBold, PiListBold, PiXBold } from "react-icons/pi";
 
 import supabase from "../../../utils/supabase.js";
 
@@ -9,13 +9,17 @@ import "./Header.css";
 
 function Header() {
     const [isShrunk, setIsShrunk] = useState(false);
-
-    const [session, setSession] = useState(null);
+    const [menuOpen, setMenuOpen] = useState(false);
 
     const location = useLocation();
     const navigate = useNavigate();
 
-    const links = ["prediction", "teams", "standings", "matches", "stadiums"];
+
+    const links = ["Prediction", "Teams", "Standings", "Matches", "Stadiums"];
+
+    const currentPage =
+        links.find((link) => location.pathname === `/${link}`) ??
+        "Home";
 
     useEffect(() => {
         const handleScroll = () => {
@@ -28,6 +32,13 @@ function Header() {
         };
     }, []);
 
+    useEffect(() => {
+        document.body.style.overflow = menuOpen ? "hidden" : "";
+
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [menuOpen]);
 
     const handleSignOut = async (e) => {
         e.preventDefault();
@@ -60,20 +71,38 @@ function Header() {
                     </div>
                 </div>
 
-                {links.map((link) => (
-                    <Link
-                        key={link}
-                        to={`/${link}`}
-                        className={`header-link ${location.pathname === `/${link}` ? "active" : ""}`}
-                        style={{
-                            "--color-hover": `var(--${isShrunk ? "primary-gold" : "light-gold"})`,
-                        }}
-                    >
-                        {link.toUpperCase()}
-                    </Link>
-                ))}
+                <div className="mobile-page-title">
+                    {currentPage}
+                </div>
 
-                <button className="sign-out-button" onClick={handleSignOut}>
+                <nav className={`header-nav ${menuOpen ? "open" : ""}`}>
+                    {links.map((link) => (
+                        <Link
+                            key={link}
+                            to={`/${link}`}
+                            onClick={() => setMenuOpen(false)}
+                            className={`header-link ${location.pathname === `/${link}` ? "active" : ""}`}
+                            style={{
+                                "--color-hover": `var(--${isShrunk && !menuOpen ? "primary-gold" : "light-gold"})`,
+                            }}
+                        >
+                            {link.toUpperCase()}
+                        </Link>
+                    ))}
+                    <button className="sign-out-button mobile" onClick={handleSignOut}>
+                        <PiSignOutBold />
+                        <span>Sign Out</span>
+                    </button>
+                </nav>
+
+                <button
+                    className={`mobile-menu-btn ${menuOpen ? "open" : ""}`}
+                    onClick={() => setMenuOpen((prev) => !prev)}
+                >
+                    {menuOpen ? <PiXBold /> : <PiListBold />}
+                </button>
+
+                <button className="sign-out-button desktop" onClick={handleSignOut}>
                     <PiSignOutBold />
                 </button>
             </div>
