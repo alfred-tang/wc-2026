@@ -25,7 +25,7 @@ import "./PotSearch.css";
 function PotSearch({ pots }) {
     const [fullscreenBoard, setFullscreenBoard] = useState(false);
     const [editMode, setEditMode] = useState(false);
-    const [showEditBanner, setShowEditBanner]= useState(false);
+    const [showEditBanner, setShowEditBanner] = useState(false);
     const [closingBanner, setClosingBanner] = useState(false);
     const [showListModal, setShowListModal] = useState(false);
     const [userName, setUserName] = useState("");
@@ -75,6 +75,12 @@ function PotSearch({ pots }) {
 
     return (
         <div className={`pot-search ${showResults ? "show" : ""}`}>
+            <div className="prediction-intro">
+                <h1>Pick Your World Cup Teams</h1>
+                <span>
+                    Enter your name, pick team from each pot, and guess the champions of World Cup 2026.
+                </span>
+            </div>
             <div className="search-header">
                 <div className="name-section">
                     <div className="input-wrapper">

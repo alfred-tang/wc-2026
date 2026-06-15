@@ -121,3 +121,33 @@
         filter: brightness(100%) saturate(100%);
     }
 }
+
+@media (max-width: 768px) {
+    .pot-teams > * {
+        min-width: 0;
+    }
+
+    .pot-teams {
+        grid-template-columns: 1fr;
+        margin: 5px 0px;
+    }
+
+    .team-name {
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+
+    .pot-container {
+        padding: 20px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .pot-header h2 {
+        font-size: 1.2rem;
+    }
+
+    .close-pots-btn {
+        font-size: 1.2rem;
+    }
+}
