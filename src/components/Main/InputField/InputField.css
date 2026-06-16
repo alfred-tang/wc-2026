@@ -59,9 +59,20 @@
     color: whitesmoke;
     filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.25));
 
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .clear-input-btn:hover {
     color: white;
+}
+
+@media (max-width: 768px) {
+    .search-input {
+        height: 100%;
+    }
+
+    .search-input-alt {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
 }

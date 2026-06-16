@@ -2,19 +2,21 @@ import { useState, useEffect } from "react";
 
 import "./MatchEdit.css";
 
-function MatchEdit({
-    match,
-    onSave,
-    onClose,
-}) {
+function MatchEdit({ match, onSave, onClose }) {
     const [homeScore, setHomeScore] = useState("");
     const [awayScore, setAwayScore] = useState("");
+
+    const [homeDiscipline, setHomeDiscipline] = useState("");
+    const [awayDiscipline, setAwayDiscipline] = useState("");
 
     useEffect(() => {
         if (!match) return;
 
         setHomeScore(match.home_score ?? "");
         setAwayScore(match.away_score ?? "");
+
+        setHomeDiscipline(match.home_discipline ?? "");
+        setAwayDiscipline(match.away_discipline ?? "");
     }, [match]);
 
     if (!match) return null;
@@ -25,38 +27,67 @@ function MatchEdit({
                 {match.home_info?.name} vs {match.away_info?.name}
             </h2>
 
-            <div className="score-inputs">
-                <input
-                    type="number"
-                    min="0"
-                    value={homeScore}
-                    onChange={(e) => setHomeScore(e.target.value)}
-                />
+            <div className="edit-section">
+                <h3>Score</h3>
 
-                <span>-</span>
+                <div className="score-inputs">
+                    <input
+                        type="number"
+                        min="0"
+                        value={homeScore}
+                        onChange={(e) => setHomeScore(e.target.value)}
+                    />
 
-                <input
-                    type="number"
-                    min="0"
-                    value={awayScore}
-                    onChange={(e) => setAwayScore(e.target.value)}
-                />
+                    <span>-</span>
+
+                    <input
+                        type="number"
+                        min="0"
+                        value={awayScore}
+                        onChange={(e) => setAwayScore(e.target.value)}
+                    />
+                </div>
+            </div>
+
+            <div className="edit-section">
+                <h3>Discipline</h3>
+
+                <div className="score-inputs">
+                    <input
+                        type="number"
+                        min="0"
+                        value={homeDiscipline}
+                        onChange={(e) => setHomeDiscipline(e.target.value)}
+                    />
+
+                    <span>-</span>
+
+                    <input
+                        type="number"
+                        min="0"
+                        value={awayDiscipline}
+                        onChange={(e) => setAwayDiscipline(e.target.value)}
+                    />
+                </div>
             </div>
 
             <div className="actions">
                 <button
+                    className="save-btn"
                     onClick={() =>
                         onSave(
                             match.match_id,
                             Number(homeScore),
                             Number(awayScore),
+                            Number(homeDiscipline),
+                            Number(awayDiscipline),
                         )
                     }
                 >
                     Save
                 </button>
 
-                <button onClick={onClose}>
+                <button className="cancel-btn" onClick={onClose}>
                     Cancel
                 </button>
             </div>

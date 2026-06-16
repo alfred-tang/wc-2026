@@ -382,8 +382,16 @@
         margin: auto;
     }
 
+    .search-container,
+    .list-btn {
+        display: flex;
+        align-items: center;
+        height: 56px;
+    }
+
     .list-btn {
         width: 20%;
+        padding: 0px;
     }
 
     .pot-search.show .list-btn {

@@ -1,26 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
-import { lastFive } from "../../../utils/helpers";
+import { lastFive, calculateStandings } from "../../../utils/helpers";
 
 import "./StandingTable.css";
 
-const StandingTable = ({ standing }) => {
+const StandingTable = ({ standing, matches }) => {
     const { name, standing_teams } = standing;
 
-    const [sortedData, setSortedData] = useState(standing_teams);
+    const groupMatches = matches.filter(
+        (match) => match.stage === "First Stage"
+    );
 
-    useEffect(() => {
-        const sorted = [...sortedData].sort((a, b) => {
-            if (b.points !== a.points) return b.points - a.points;
-            if (b.goals_for - b.goals_against !== a.goals_for - a.goals_against)
-                return b.goals_for - b.goals_against - (a.goals_for - a.goals_against);
-            if (b.goals_for !== a.goals_for) return b.goals_for - a.goals_for;
-
-            return a.pool - b.pool;
-        });
-
-        setSortedData(sorted);
-    }, []);
+    const sortedData = useMemo(() => {
+        return calculateStandings(
+            standing_teams.map(item => item),
+            groupMatches
+        );
+    }, [standing_teams, groupMatches]);
 
     return (
         <div className="standing-wrapper transparent-card">
@@ -61,7 +57,7 @@ const StandingTable = ({ standing }) => {
                                 </div>
                                 {team.teams.name}
                             </td>
-                            <td>{team.points}</td>
+                            <td>{team.played}</td>
                             <td>{team.wins}</td>
                             <td>{team.draws}</td>
                             <td>{team.losses}</td>

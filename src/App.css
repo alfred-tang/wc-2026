@@ -16,6 +16,7 @@ main {
 @media (max-width: 768px) {
     main {
         padding-top: 110px;
+        min-height: 100dvh;
         background-image:
             linear-gradient(
                 to bottom,
@@ -23,5 +24,6 @@ main {
                 #333 100%
             ),
             url("/assets/filter/grain.svg"), url("/assets/tournament/messi-2.jpg");
+        background-attachment: initial;
     }
 }

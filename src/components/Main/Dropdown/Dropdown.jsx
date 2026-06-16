@@ -88,14 +88,14 @@ const Dropdown = ({
 
             {open && (
                 <div className={classNames.menu || ""}>
-                    {computedOptions.map((option) => {
+                    {computedOptions.map((option, index) => {
                         const isActive = multiSelect
                             ? selected.includes(option)
                             : selected === option;
 
                         return (
                             <div
-                                key={content === "Team" ? option?.name : option}
+                                key={option?.team_id ?? option?.id ?? option?.name ?? `${option}-${index}`}
                                 className={`${classNames.item || ""} ${isActive ? "active" : ""}`}
                                 onClick={() => handleSelect(option)}
                             >

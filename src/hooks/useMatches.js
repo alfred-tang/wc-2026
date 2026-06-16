@@ -23,10 +23,12 @@ const useMatches = () => {
                 match_order,
                 stage,
                 kick_off,
+                home_info:teams!home_team(team_id, name, flag, stage),
                 home_score,
+                home_discipline,
+                away_info:teams!away_team(team_id, name, flag, stage),
                 away_score,
-                home_info:teams!home_team(name, flag, stage),
-                away_info:teams!away_team(name, flag, stage),
+                away_discipline,
                 stadiums(name, city, state_province)
             `);
 
@@ -46,10 +48,21 @@ const useMatches = () => {
         fetchMatches();
     }, []);
 
-    const updateMatchScore = async (matchId, homeScore, awayScore) => {
+    const updateMatchScore = async (
+        matchId,
+        homeScore,
+        awayScore,
+        homeDiscipline,
+        awayDiscipline,
+    ) => {
         const { error } = await supabase
             .from("matches")
-            .update({ home_score: homeScore, away_score: awayScore })
+            .update({
+                home_score: homeScore,
+                away_score: awayScore,
+                home_discipline: homeDiscipline,
+                away_discipline: awayDiscipline,
+            })
             .eq("match_id", matchId);
 
         if (error) {
@@ -64,6 +77,8 @@ const useMatches = () => {
                         ...match,
                         home_score: homeScore,
                         away_score: awayScore,
+                        home_discipline: homeDiscipline,
+                        away_discipline: awayDiscipline,
                     }
                     : match,
             ),
@@ -75,6 +90,8 @@ const useMatches = () => {
                     ...match,
                     home_score: homeScore,
                     away_score: awayScore,
+                    home_discipline: homeDiscipline,
+                    away_discipline: awayDiscipline,
                 }
                 : match,
         );

@@ -77,7 +77,7 @@ export const lastFive = (arr) => {
     const result = arr.slice(-5);
 
     while (result.length < 5) {
-        result.unshift('—');
+        result.push('—');
     }
 
     return result;
@@ -102,4 +102,113 @@ export const toGeoJson = (rows) => {
             }
         }))
     }
+}
+
+export function calculateStandings(teams, matches) {
+    const standings = {};
+
+    teams.forEach((team) => {
+        standings[team.team_id] = {
+            ...team,
+
+            played: 0,
+            wins: 0,
+            draws: 0,
+            losses: 0,
+
+            goals_for: 0,
+            goals_against: 0,
+
+            points: 0,
+            discipline: 0,
+
+            form: [],
+        };
+    });
+
+    matches.forEach((match) => {
+        if (
+            match.home_score === null ||
+            match.away_score === null
+        ) {
+            return;
+        }
+
+        const home = standings[match.home_info.team_id];
+        const away = standings[match.away_info.team_id];
+
+        if (!home || !away) return;
+
+        home.discipline += match.home_discipline ?? 0;
+        away.discipline += match.away_discipline ?? 0;
+
+        home.played++;
+        away.played++;
+
+        home.goals_for += match.home_score;
+        home.goals_against += match.away_score;
+
+        away.goals_for += match.away_score;
+        away.goals_against += match.home_score;
+
+        if (match.home_score > match.away_score) {
+            home.wins++;
+            home.points += 3;
+            home.form.push("W");
+
+            away.losses++;
+            away.form.push("L");
+        }
+        else if (match.home_score < match.away_score) {
+            away.wins++;
+            away.points += 3;
+            away.form.push("W");
+
+            home.losses++;
+            home.form.push("L");
+        }
+        else {
+            home.draws++;
+            away.draws++;
+
+            home.points++;
+            away.points++;
+
+            home.form.push("D");
+            away.form.push("D");
+        }
+    });
+
+    return Object.values(standings)
+        .map((team) => ({
+            ...team,
+
+            goal_difference:
+                team.goals_for - team.goals_against,
+
+            form: team.form.slice(-5),
+        }))
+        .sort((a, b) => {
+            if (b.points !== a.points)
+                return b.points - a.points;
+
+            const gdA =
+                a.goals_for - a.goals_against;
+
+            const gdB =
+                b.goals_for - b.goals_against;
+
+            if (gdB !== gdA)
+                return gdB - gdA;
+
+            if (b.goals_for !== a.goals_for)
+                return b.goals_for - a.goals_for;
+
+            // Fair Play (lower discipline is better)
+            if (a.discipline !== b.discipline) {
+                return a.discipline - b.discipline;
+            }
+
+            return a.pool - b.pool;
+        });
 }
