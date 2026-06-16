@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 
+import { PiMinusCircleFill, PiXCircleFill, PiCheckCircleFill } from "react-icons/pi";
 import { lastFive, calculateStandings } from "../../../utils/helpers";
 
 import "./StandingTable.css";
@@ -66,11 +67,22 @@ const StandingTable = ({ standing, matches }) => {
                             <td>{team.goals_for - team.goals_against}</td>
                             <td>{team.points}</td>
                             <td>
-                                {lastFive(team.form).map((m, i) => (
-                                    <span className="form-match" key={i}>
-                                        {m}
-                                    </span>
-                                ))}
+                                <div className="form-list">
+                                    {lastFive(team.form).map((result, i) => (
+                                        <span
+                                            key={i}
+                                            className={`form-match ${
+                                                result === "W"
+                                                    ? "win" : result === "D" ? "draw" : result === "L" ? "loss" : "empty"
+                                            }`}
+                                        >
+                                            {result === "W" && <PiCheckCircleFill/>}
+                                            {result === "D" && <PiMinusCircleFill/>}
+                                            {result === "L" && <PiXCircleFill/>}
+                                            {result === "—" && "—"}
+                                        </span>
+                                    ))}
+                                </div>
                             </td>
                         </tr>
                     ))}
