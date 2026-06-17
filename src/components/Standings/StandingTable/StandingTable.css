@@ -13,8 +13,8 @@
 }
 
 .standing-table td:nth-child(10) {
-        font-weight: 700;
-    }
+    font-weight: 700;
+}
 
 .standing-table th:first-child {
     border-top-left-radius: 25px;
@@ -48,9 +48,12 @@
 }
 
 .standing-col {
+    min-width: 250px;
+}
+
+.standing-col-content {
     display: flex;
     align-items: center;
-    min-width: 250px;
 }
 
 .form-list {
@@ -105,9 +108,6 @@
     .standing-col {
         min-width: 0;
         width: auto;
-
-        display: flex;
-        align-items: center;
 
         white-space: normal;
         overflow-wrap: break-word;

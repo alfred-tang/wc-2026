@@ -49,6 +49,8 @@
     background: transparent;
     position: relative;
     border: none;
+    border-radius: 10px 0px 10px 0px;
+    padding: 0px;
     width: 100%;
     margin: 20px 0px;
     cursor: pointer;
@@ -67,7 +69,6 @@
 }
 
 .pot-teams:hover {
-    border-radius: 10px 0px 10px 0px;
     position: relative;
     background: linear-gradient(45deg, lightcyan 0%, indianred 50%, royalblue 100%);
     background-size: 200% 200%;

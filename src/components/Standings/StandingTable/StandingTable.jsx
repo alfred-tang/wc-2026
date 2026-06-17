@@ -41,22 +41,26 @@ const StandingTable = ({ standing, matches }) => {
                         <tr key={team.team_id}>
                             <td className="number-col">{index + 1}</td>
                             <td className="standing-col">
-                                <div
-                                    className="flag-container"
-                                    style={{
-                                        "--flag-width": "36px",
-                                        margin: "10px 20px 10px 5px",
-                                    }}
-                                >
-                                    <img
-                                        style={{ filter: "drop-shadow(0px 0px 1px #333)" }}
-                                        src={`https://flagcdn.com/h120/${team.teams.flag}.png`}
-                                        srcSet={`https://flagcdn.com/h240/${team.teams.flag}.png 2x`}
-                                        alt={team.teams.name}
-                                        loading="lazy"
-                                    />
+                                <div className="standing-col-content">
+                                    <div
+                                        className="flag-container"
+                                        style={{
+                                            "--flag-width": "36px",
+                                            margin: "10px 20px 10px 5px",
+                                        }}
+                                    >
+                                        <img
+                                            style={{ filter: "drop-shadow(0px 0px 1px #333)" }}
+                                            src={`https://flagcdn.com/h120/${team.teams.flag}.png`}
+                                            srcSet={`https://flagcdn.com/h240/${team.teams.flag}.png 2x`}
+                                            alt={team.teams.name}
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                    <span>
+                                        {team.teams.name}
+                                    </span>
                                 </div>
-                                {team.teams.name}
                             </td>
                             <td>{team.played}</td>
                             <td>{team.wins}</td>

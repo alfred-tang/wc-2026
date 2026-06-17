@@ -10,13 +10,11 @@ function PotTeam({ team, owner, disabled }) {
                 "--color-hover": `var(--team-${team.flag})`,
             }}
         >
-            <div className="flag-container">
-                <img
-                    src={`/assets/team/${team.flag}-logo.svg`}
-                    alt={team.name}
-                    loading="lazy"
-                />
-            </div>
+            <img
+                src={`/assets/team/${team.flag}-logo.svg`}
+                alt={team.name}
+                loading="lazy"
+            />
             <div>
                 {team.name}{" "}
                 {owner && (

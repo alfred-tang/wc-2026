@@ -15,9 +15,14 @@
 }
 
 .search-input {
+    appearance: none;
+    -webkit-appearance: none;
+    line-height: 1;
+
     font-family: "FWC2026 Normal", sans-serif;
     color: whitesmoke;
     background-color: transparent;
+
     width: 100%;
     box-sizing: border-box;
     border: none;
@@ -26,6 +31,7 @@
 
 .pot-search.show .search-input {
     font-size: 18px;
+    height: 52px;
 }
 
 .search-input:focus {
@@ -34,6 +40,7 @@
 
 .search-input-alt {
     font-size: 24px;
+    height: 69px;
     padding-inline: 1em;
     padding-block: 0.8em;
 }

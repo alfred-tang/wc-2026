@@ -83,7 +83,25 @@ const MatchRow = ({ match, selected, onEdit }) => {
                         />
                     </div>
                 </div>
-                <div className="match-time">{matchDisplay}</div>
+                <div className="match-time">
+                    {home_score !== null && away_score !== null ? (
+                        <>
+                            <span
+                                className={`score ${home_score > away_score ? "winner" : home_score < away_score ? "loser" : ""}`}
+                            >
+                                {home_score}
+                            </span>
+                            <span className="score-separator">-</span>
+                            <span
+                                className={`score ${away_score > home_score ? "winner" : away_score < home_score ? "loser" : ""}`}
+                            >
+                                {away_score}
+                            </span>
+                        </>
+                    ) : (
+                        matchDisplay
+                    )}
+                </div>
                 <div className="team-name away">
                     <div className="flag-container" style={{ "--flag-width": "48px" }}>
                         <img
