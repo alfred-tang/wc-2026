@@ -1,6 +1,9 @@
 import { PiMapPinFill } from "react-icons/pi";
 
+import { useIsMobile } from "../../../hooks/useIsMobile";
+
 import { months, dayNames } from "../../../utils/helpers";
+
 import "./MatchRow.css";
 
 const placeholderFlag = "/assets/team/shield-logo.png";
@@ -24,6 +27,8 @@ const MatchRow = ({ match, selected, onEdit }) => {
     const year = matchDate.getFullYear();
     const hour = matchDate.getHours().toString().padStart(2, "0");
     const minute = matchDate.getMinutes().toString().padStart(2, "0");
+
+    const isMobile = useIsMobile();
 
     let matchDisplay;
 
@@ -65,7 +70,7 @@ const MatchRow = ({ match, selected, onEdit }) => {
             </div>
             <div className="score-line">
                 <div className="team-name home">
-                    <span>{home_info?.name}</span>
+                    <span>{isMobile ? home_info?.short_name.toUpperCase() : home_info?.name}</span>
                     <div className="flag-container" style={{ "--flag-width": "48px" }}>
                         <img
                             src={
@@ -119,7 +124,7 @@ const MatchRow = ({ match, selected, onEdit }) => {
                             loading="lazy"
                         />
                     </div>
-                    <span>{away_info?.name}</span>
+                    <span>{isMobile ? away_info?.short_name.toUpperCase() : away_info?.name}</span>
                 </div>
             </div>
             <div className="match-stadium">

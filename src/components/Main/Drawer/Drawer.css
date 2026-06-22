@@ -53,6 +53,7 @@
     cursor: pointer;
     font-size: 1.25em;
     transition: color 0.2s ease;
+    color: #333;
 }
 
 .drawer-exit:hover {
@@ -143,4 +144,10 @@ h2 {
 .apply-button {
     background: #333 !important;
     color: whitesmoke !important;
+}
+
+@media (max-width: 768px) {
+    .drawer {
+        width: 100%;
+    }
 }

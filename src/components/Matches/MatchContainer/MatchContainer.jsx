@@ -145,7 +145,7 @@ const MatchContainer = ({ matches, updateMatchScore }) => {
                         return 0;
                     })
                     .map(([key, matches]) => (
-                        <div key={key}>
+                        <div className="match-row-wrapper" key={key}>
                             <h2>{key}</h2>
                             {matches.map((match) => (
                                 <MatchRow

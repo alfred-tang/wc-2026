@@ -39,9 +39,10 @@
 
 .match-extra {
     font-family: 'FWC2026 Condensed', sans-serif;
-    width: 15%;
+    width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 10px;
     align-items: center;
     font-size: 18px;
 }
@@ -51,11 +52,6 @@
     display: flex;
     gap: 8px;
 }
-
-/* .match-time {
-    font-size: 22px;
-    font-weight: 900;
-} */
 
 .match-time {
     font-size: 22px;
@@ -98,4 +94,59 @@
 
 .score-separator {
     color: inherit;
+}
+
+@media (max-width: 768px) {
+    .match-row {
+        gap: 10px;
+        margin: 12px 0;
+        padding: 14px 10px;
+    }
+
+    .score-line {
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .team-name {
+        width: calc((100% - 90px) / 2);
+        font-size: 0.9rem;
+        gap: 6px;
+    }
+
+    .team-name span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .team-name .flag-container {
+        --flag-width: 32px !important;
+        flex-shrink: 0;
+    }
+
+    .match-time {
+        min-width: 70px;
+        font-size: 1rem;
+        gap: 4px;
+    }
+
+    .match-extra {
+        font-size: 0.8rem;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+
+    .match-stadium {
+        font-size: 0.75rem;
+        text-align: center;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px;
+    }
+
+    .score.winner::after {
+        height: 2px;
+        bottom: -2px;
+    }
 }

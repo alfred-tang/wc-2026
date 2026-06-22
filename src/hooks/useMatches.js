@@ -23,10 +23,10 @@ const useMatches = () => {
                 match_order,
                 stage,
                 kick_off,
-                home_info:teams!home_team(team_id, name, flag, stage),
+                home_info:teams!home_team(team_id, name, short_name, flag, stage),
                 home_score,
                 home_discipline,
-                away_info:teams!away_team(team_id, name, flag, stage),
+                away_info:teams!away_team(team_id, name, short_name, flag, stage),
                 away_score,
                 away_discipline,
                 stadiums(name, city, state_province)

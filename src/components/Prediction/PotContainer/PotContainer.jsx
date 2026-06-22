@@ -104,18 +104,19 @@ function PotContainer({
                     height: "99.4%",
                 }}
             >
-                <div className="flag-container" style={{ "--flag-width": "120px" }}>
+                <div>
                     <img
                         src={`/assets/team/${selectedResult?.team.flag}-logo.svg`}
                         alt=""
+                        style={{ height: "150px" }}
                     />
+                    <h1>{currentUser?.username}</h1>
+                    <h2>
+                        {selectedResult?.team.name} from {potNames[selectedResult?.pot]?.name}
+                        !
+                    </h2>
+                    <p>Price: {potNames[selectedResult?.pot]?.price}k VND</p>
                 </div>
-                <h1>{currentUser?.username}</h1>
-                <h2>
-                    {selectedResult?.team.name} from {potNames[selectedResult?.pot]?.name}
-                    !
-                </h2>
-                <p>Price: {potNames[selectedResult?.pot]?.price}k VND</p>
             </Modal>
         </>
     );
