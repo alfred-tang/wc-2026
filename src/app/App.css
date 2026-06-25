@@ -1,28 +1,46 @@
+:root {
+    --app-background-overlay: linear-gradient(
+        to bottom,
+        transparent 65%,
+        whitesmoke 100%
+    );
+}
+
+#root::before {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+
+    background-image:
+        var(--app-background-overlay),
+        url("/assets/filter/grain.svg"),
+        url("/assets/tournament/messi-2.jpg");
+
+    background-size: 100% 100%, 250px 250px, cover;
+    background-position: center, center, center;
+    background-repeat: no-repeat, repeat, no-repeat;
+}
+
 main {
     position: relative;
 
     margin: 0px;
     padding: 125px clamp(16px, 5vw, 100px) 25px;
-
-    background-image:
-        linear-gradient(to bottom, transparent 65%, whitesmoke 100%), url("/assets/filter/grain.svg"),
-        url("/assets/tournament/messi-2.jpg");
-
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
 }
 
 @media (max-width: 768px) {
+    :root {
+        --app-background-overlay: linear-gradient(
+            to bottom,
+            transparent 45%,
+            #333 100%
+        );
+    }
+
     main {
         padding-top: 110px;
-        min-height: 100dvh;
-        background-image:
-            linear-gradient(
-                to bottom,
-                transparent 45%,
-                #333 100%
-            ),
-            url("/assets/filter/grain.svg"), url("/assets/tournament/messi-2.jpg");
     }
 }
