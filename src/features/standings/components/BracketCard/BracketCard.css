@@ -1,0 +1,253 @@
+/* Match Cards */
+.match-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 0px 5px;
+
+    position: relative;
+}
+
+.left .match-wrapper {
+    flex-direction: row;
+}
+
+.right .match-wrapper {
+    flex-direction: row-reverse;
+}
+
+.match-card {
+    min-width: 125px;
+
+    border-radius: 16px;
+}
+
+.match-header {
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #333;
+
+    font-size: 0.75rem;
+}
+
+.match-date {
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 5px;
+
+    font-size: 0.72rem;
+    color: #666;
+}
+
+/* Teams */
+.team {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: white;
+    color: #333;
+
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 5px;
+
+    border: 1px solid gainsboro;
+}
+
+.team ~ .team {
+    margin-bottom: 0px;
+}
+
+.team span:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    font-size: small;
+    max-width: 80%;
+}
+
+.team span:last-child {
+    margin-left: 8px;
+
+    font-weight: 400;
+    font-size: 0.95rem;
+}
+
+/* Center Stage */
+.center-column .match-wrapper {
+    padding: 10px;
+    border-radius: 10px;
+    align-items: center;
+    gap: 8px;
+}
+
+.center-column .team {
+    width: 150px;
+}
+
+/* Shared white text */
+.final-match .match-date,
+.center-column .match-header,
+.center-column .match-date,
+.final-match .team,
+.third-place .team {
+    color: whitesmoke;
+}
+
+/* Shared transparent team cards */
+.final-match .team,
+.third-place .team {
+    background: transparent;
+    border: 1px solid whitesmoke;
+}
+
+/* Shared transition for final and third-place wrappers */
+.final-match .match-wrapper,
+.third-place .match-wrapper {
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background-position 0.6s ease;
+}
+
+/* Final Match */
+.final-match .match-wrapper {
+    flex-direction: column-reverse;
+
+    background: linear-gradient(
+        135deg,
+        var(--primary-gold) 0%,
+        var(--light-gold) 35%,
+        #fff4c2 65%,
+        var(--primary-gold) 100%
+    );
+
+    box-shadow:
+        0 4px 12px rgba(212, 175, 55, 0.25);
+
+    background-size: 400% 400%;
+}
+
+.final-match .match-wrapper:hover {
+    transform: scale(1.01);
+
+    background-position: 100% 100%;
+
+    box-shadow:
+        0 8px 24px rgba(212, 175, 55, 0.4),
+        0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+/* Third Place Match */
+.third-place .match-wrapper {
+    flex-direction: column;
+
+    background: linear-gradient(
+        135deg,
+        #8b5a2b 0%,
+        #c68642 40%,
+        #e3b778 70%,
+        #8b5a2b 100%
+    );
+
+    background-size: 200% 200%;
+
+    box-shadow:
+        0 4px 12px rgba(139, 90, 43, 0.2);
+}
+
+.third-place .match-wrapper:hover {
+    transform: scale(1.01);
+
+    background-position: 100% 50%;
+
+    box-shadow:
+        0 8px 18px rgba(139, 90, 43, 0.35),
+        0 0 14px rgba(198, 134, 66, 0.25);
+}
+
+/* Shared styles for final-match and third-place wrappers */
+.final-match .match-wrapper,
+.third-place .match-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.final-match .match-wrapper::before,
+.third-place .match-wrapper::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        120deg,
+        transparent 20%,
+        rgba(255,255,255,0.35) 50%,
+        transparent 80%
+    );
+
+    transform: translateX(-150%);
+    transition: transform 0.6s ease;
+}
+
+.final-match .match-wrapper:hover::before,
+.third-place .match-wrapper:hover::before {
+    transform: translateX(150%);
+}
+
+@media (max-width: 768px) {
+    .match-wrapper {
+        gap: 6px;
+        padding: 0px 2px;
+    }
+
+    .match-card {
+        min-width: 105px;
+        border-radius: 10px;
+    }
+
+    .center-column .team {
+        width: 120px;
+    }
+
+    .team {
+        padding: 4px 6px;
+        border-radius: 4px;
+    }
+
+    .team span:first-child {
+        font-size: 0.7rem;
+        max-width: 75%;
+    }
+
+    .team span:last-child {
+        font-size: 0.8rem;
+    }
+
+    .match-header {
+        font-size: 0.65rem;
+        white-space: nowrap;
+    }
+
+    .match-date {
+        font-size: 0.6rem;
+        margin-bottom: 3px;
+    }
+
+    .final-match .match-wrapper,
+    .third-place .match-wrapper {
+        transform-origin: center;
+    }
+}

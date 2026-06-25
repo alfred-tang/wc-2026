@@ -1,0 +1,33 @@
+.round {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Round Spacing */
+.round32 {
+    gap: 50px;
+}
+
+.round16 {
+    gap: 180px;
+}
+
+.quarter {
+    gap: 450px;
+}
+
+@media (max-width: 768px) {
+    .round32 {
+        gap: 20px;
+    }
+
+    .round16 {
+        gap: 110px;
+    }
+
+    .quarter {
+        gap: 275px;
+    }
+}
