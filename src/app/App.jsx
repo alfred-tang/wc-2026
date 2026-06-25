@@ -39,19 +39,21 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Header />
-      <main>
-        <Routes>
-          <Route path="/" element={<Prediction />} />
-          <Route path="/standings" element={<Standings />} />
-          <Route path="/teams" element={<Teams />} />
-          <Route path="/stadiums" element={<Stadiums />} />
-          <Route path="/matches" element={<Matches />} />
-          <Route path="/prediction" element={<Prediction />} />
-        </Routes>
-      </main>
-    </BrowserRouter>
+    <div className="app-shell">
+      <BrowserRouter>
+        <Header />
+        <main>
+          <Routes>
+            <Route path="/" element={<Prediction />} />
+            <Route path="/standings" element={<Standings />} />
+            <Route path="/teams" element={<Teams />} />
+            <Route path="/stadiums" element={<Stadiums />} />
+            <Route path="/matches" element={<Matches />} />
+            <Route path="/prediction" element={<Prediction />} />
+          </Routes>
+        </main>
+      </BrowserRouter>
+    </div>
   );
 }
 

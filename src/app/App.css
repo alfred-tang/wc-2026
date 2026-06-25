@@ -6,7 +6,7 @@
     );
 }
 
-#root::before {
+.app-shell::before {
     content: "";
 
     position: fixed;
