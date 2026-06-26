@@ -37,7 +37,7 @@
 
 .bracket-side {
     display: flex;
-    gap: 20px;
+    gap: 10px;
 }
 
 .bracket-column {
@@ -97,24 +97,17 @@
 @media (max-width: 768px) {
     .wc-bracket {
         justify-content: flex-start;
-        gap: 20px;
+        gap: 5px;
 
         -webkit-overflow-scrolling: touch;
     }
 
     .bracket-side {
-        gap: 10px;
+        gap: 5px;
     }
 
     .bracket-column {
         gap: 10px;
-    }
-
-    .bracket-column h3,
-    .center-column h3 {
-        font-size: 0.75rem;
-        margin-bottom: 8px;
-        white-space: nowrap;
     }
 
     .center-column {

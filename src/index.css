@@ -49,6 +49,11 @@
     --team-tr: 255, 255, 255;
     --primary-gold: #BA9503;
     --light-gold: #fff1ba;
+    --app-background-overlay: linear-gradient(
+        to bottom,
+        transparent 65%,
+        whitesmoke 100%
+    );
 }
 
 html,

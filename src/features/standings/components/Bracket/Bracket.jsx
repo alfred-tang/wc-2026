@@ -11,12 +11,14 @@ import {
 } from "./bracketConfig";
 
 import useBracketPaths from "../../hooks/useBracketPaths";
+import { useIsMobile } from "../../../../hooks/useIsMobile";
 
 import "./Bracket.css";
 
 function Bracket({ matches }) {
     const bracketRef = useRef(null);
     const matchRefs = useRef(new Map());
+    const isMobile = useIsMobile();
 
     const registerRef = useCallback((id, el) => {
         if (id == null) return;
@@ -43,24 +45,69 @@ function Bracket({ matches }) {
                 matches: byOrder(orders),
             }));
 
-        return {
-            leftColumns: buildColumns("left"),
-            rightColumns: buildColumns("right"),
-            final: matchList.find((match) => match.stage === FINAL_STAGE),
-            third: matchList.find((match) => match.stage === THIRD_PLACE_STAGE),
-        };
-    }, [matches]);
+        const leftColumns = buildColumns("left");
+        const rightColumns = buildColumns("right");
 
-    const layoutKey = [
-        ...data.leftColumns.flatMap((column) =>
-            column.matches.map((match) => match.match_id),
-        ),
-        data.final?.match_id ?? "",
-        data.third?.match_id ?? "",
-        ...data.rightColumns.flatMap((column) =>
-            column.matches.map((match) => match.match_id),
-        ),
-    ].join("|");
+        const final = matchList.find((match) => match.stage === FINAL_STAGE);
+        const third = matchList.find((match) => match.stage === THIRD_PLACE_STAGE);
+
+        if (isMobile) {
+            return {
+                column: [
+                    {
+                        round: "round32",
+                        title: "Round of 32",
+                        matches: [...leftColumns[0].matches, ...rightColumns[3].matches],
+                    },
+                    {
+                        round: "round16",
+                        title: "Round of 16",
+                        matches: [...leftColumns[1].matches, ...rightColumns[2].matches],
+                    },
+                    {
+                        round: "quarter",
+                        title: "Quarter-final",
+                        matches: [...leftColumns[2].matches, ...rightColumns[1].matches],
+                    },
+                    {
+                        round: "semi",
+                        title: "Semi-final",
+                        matches: [...leftColumns[3].matches, ...rightColumns[0].matches],
+                    },
+                ],
+                final,
+                third,
+            };
+        }
+
+        return {
+            leftColumns,
+            rightColumns,
+            final,
+            third,
+        };
+    }, [matches, isMobile]);
+
+    const layoutKey = !isMobile ? (
+        [
+            ...data.leftColumns.flatMap((column) =>
+                column.matches.map((match) => match.match_id),
+            ),
+            data.final?.match_id ?? "",
+            data.third?.match_id ?? "",
+            ...data.rightColumns.flatMap((column) =>
+                column.matches.map((match) => match.match_id),
+            ),
+        ].join("|")
+    ) : (
+        [
+            ...data.column.flatMap((column) =>
+                column.matches.map((match) => match.match_id),
+            ),
+            data.final?.match_id ?? "",
+            data.third?.match_id ?? "",
+        ].join("|")
+    );
 
     const paths = useBracketPaths({
         bracketRef,
@@ -68,7 +115,10 @@ function Bracket({ matches }) {
         hasFinal: Boolean(data.final),
         hasThird: Boolean(data.third),
         layoutKey,
+        isMobile
     });
+
+    const columns = isMobile ? data.column : data.leftColumns;
 
     return (
         <div ref={bracketRef} className="wc-bracket">
@@ -78,8 +128,11 @@ function Bracket({ matches }) {
                 ))}
             </svg>
             <div className="bracket-side left">
-                {data.leftColumns.map((column) => (
-                    <div key={`left-${column.round}`} className="bracket-column">
+                {columns.map((column, index) => (
+                    <div
+                        key={`${isMobile ? "mobile" : "left"}-${column.round}-${index}`}
+                        className="bracket-column"
+                    >
                         <BracketColumn
                             title={column.title}
                             matches={column.matches}
@@ -111,7 +164,7 @@ function Bracket({ matches }) {
                 </div>
             </div>
 
-            <div className="bracket-side right">
+            {!isMobile && <div className="bracket-side right">
                 {data.rightColumns.map((column) => (
                     <div key={`right-${column.round}`} className="bracket-column">
                         <BracketColumn
@@ -122,7 +175,7 @@ function Bracket({ matches }) {
                         />
                     </div>
                 ))}
-            </div>
+            </div>}
         </div>
     );
 }

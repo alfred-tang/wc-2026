@@ -102,7 +102,7 @@
     .standing-table th,
     .standing-table td {
         padding: 8px 4px;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 
     .standing-col {
@@ -116,7 +116,7 @@
 
     .standing-col .flag-container {
         flex-shrink: 0;
-        margin: 5px !important;
+        margin: 0px 10px 0px 0px !important;
         --flag-width: 24px !important;
     }
 
@@ -126,6 +126,7 @@
     }
 
     .standing-table th:first-child {
+        padding-left: 6px;
         border-top-left-radius: 12px;
     }
 

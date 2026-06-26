@@ -18,7 +18,7 @@
 }
 
 .match-card {
-    min-width: 125px;
+    min-width: 120px;
 
     border-radius: 16px;
 }
@@ -58,7 +58,7 @@
     color: #333;
 
     margin-bottom: 5px;
-    padding: 5px;
+    padding: 10px;
     border-radius: 5px;
 
     border: 1px solid gainsboro;
@@ -68,20 +68,13 @@
     margin-bottom: 0px;
 }
 
-.team span:first-child {
+.team {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 
     font-size: small;
     max-width: 80%;
-}
-
-.team span:last-child {
-    margin-left: 8px;
-
-    font-weight: 400;
-    font-size: 0.95rem;
 }
 
 /* Center Stage */
@@ -93,7 +86,7 @@
 }
 
 .center-column .team {
-    width: 150px;
+    min-width: 150px;
 }
 
 /* Shared white text */
@@ -208,37 +201,8 @@
 }
 
 @media (max-width: 768px) {
-    .match-wrapper {
-        gap: 6px;
-        padding: 0px 2px;
-    }
-
     .match-card {
-        min-width: 105px;
         border-radius: 10px;
-    }
-
-    .center-column .team {
-        width: 120px;
-    }
-
-    .team {
-        padding: 4px 6px;
-        border-radius: 4px;
-    }
-
-    .team span:first-child {
-        font-size: 0.7rem;
-        max-width: 75%;
-    }
-
-    .team span:last-child {
-        font-size: 0.8rem;
-    }
-
-    .match-header {
-        font-size: 0.65rem;
-        white-space: nowrap;
     }
 
     .match-date {

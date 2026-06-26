@@ -38,6 +38,7 @@ function useBracketPaths({
     hasFinal,
     hasThird,
     layoutKey,
+    isMobile
 }) {
     const [paths, setPaths] = useState([]);
 
@@ -62,17 +63,17 @@ function useBracketPaths({
             };
 
             BRACKET_CONNECTIONS.forEach(({ from, to, reverse }) => {
-                connect(from, to, reverse);
+                connect(from, to, isMobile ? !isMobile : reverse);
             });
 
             if (hasFinal) {
                 connect(LEFT_SEMI_FINAL_ORDER, FINAL_CARD_ID);
-                connect(RIGHT_SEMI_FINAL_ORDER, FINAL_CARD_ID, true);
+                connect(RIGHT_SEMI_FINAL_ORDER, FINAL_CARD_ID, !isMobile);
             }
 
             if (hasThird) {
                 connect(LEFT_SEMI_FINAL_ORDER, THIRD_PLACE_CARD_ID);
-                connect(RIGHT_SEMI_FINAL_ORDER, THIRD_PLACE_CARD_ID, true);
+                connect(RIGHT_SEMI_FINAL_ORDER, THIRD_PLACE_CARD_ID, !isMobile);
             }
 
             setPaths((currentPaths) =>
