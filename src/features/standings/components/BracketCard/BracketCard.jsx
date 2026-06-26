@@ -48,54 +48,70 @@ function BracketCard({ match, cardId, registerRef, large = false }) {
                     <span>{time}</span>
                 </div>
 
-                <div className="team">
-                    <div style={{ display: "flex", gap: "5px", alignItems: "center" }}>
-                        {match?.home_info?.short_name && (
-                            <div
-                                className="flag-container"
-                                style={{ "--flag-width": "18px" }}
-                            >
-                                <img
-                                    src={`https://flagcdn.com/h120/${match.home_info.flag}.png`}
-                                    srcSet={`https://flagcdn.com/h240/${match.home_info.flag}.png 2x`}
-                                    alt={match?.home_info?.name}
-                                    loading="lazy"
-                                />
-                            </div>
-                        )}
-                        <span>
-                            {match.home_info?.short_name.toUpperCase() ||
-                                match.home_info?.name ||
-                                "TBD"}
-                        </span>
+                <div
+                    className={`team-wrapper home-team ${
+                        match.home_info?.short_name ? "" : "disabled"
+                    }`}
+                >
+                    <div className="team">
+                        <div className="team-container">
+                            {match?.home_info?.short_name && (
+                                <div
+                                    className="flag-container"
+                                    style={{ "--flag-width": "18px" }}
+                                >
+                                    <img
+                                        src={`https://flagcdn.com/h120/${match.home_info.flag}.png`}
+                                        srcSet={`https://flagcdn.com/h240/${match.home_info.flag}.png 2x`}
+                                        alt={match?.home_info?.name}
+                                        loading="lazy"
+                                    />
+                                </div>
+                            )}
+                            <span>
+                                {match.home_info?.short_name.toUpperCase() || "TBD"}
+                            </span>
+                        </div>
+
+                        <span>{match.home_score ?? ""}</span>
                     </div>
 
-                    <span>{match.home_score ?? ""}</span>
+                    <div className="team-fullname">
+                        {match?.home_info?.name}
+                    </div>
                 </div>
 
-                <div className="team">
-                    <div style={{ display: "flex", gap: "5px", alignItems: "center" }}>
-                        {match?.away_info?.short_name && (
-                            <div
-                                className="flag-container"
-                                style={{ "--flag-width": "18px" }}
-                            >
-                                <img
-                                    src={`https://flagcdn.com/h120/${match.away_info.flag}.png`}
-                                    srcSet={`https://flagcdn.com/h240/${match.away_info.flag}.png 2x`}
-                                    alt={match?.away_info?.name}
-                                    loading="lazy"
-                                />
-                            </div>
-                        )}
-                        <span>
-                            {match.away_info?.short_name.toUpperCase() ||
-                                match.away_info?.name ||
-                                "TBD"}
-                        </span>
+                <div
+                    className={`team-wrapper away-team ${
+                        match.away_info?.short_name ? "" : "disabled"
+                    }`}
+                >
+                    <div className="team">
+                        <div className="team-container">
+                            {match?.away_info?.short_name && (
+                                <div
+                                    className="flag-container"
+                                    style={{ "--flag-width": "18px" }}
+                                >
+                                    <img
+                                        src={`https://flagcdn.com/h120/${match.away_info.flag}.png`}
+                                        srcSet={`https://flagcdn.com/h240/${match.away_info.flag}.png 2x`}
+                                        alt={match?.away_info?.name}
+                                        loading="lazy"
+                                    />
+                                </div>
+                            )}
+                            <span>
+                                {match.away_info?.short_name.toUpperCase() || "TBD"}
+                            </span>
+                        </div>
+
+                        <span>{match.away_score ?? ""}</span>
                     </div>
 
-                    <span>{match.away_score ?? ""}</span>
+                    <div className="team-fullname">
+                        {match?.away_info?.name}
+                    </div>
                 </div>
             </div>
         </div>

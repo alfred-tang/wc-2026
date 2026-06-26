@@ -49,12 +49,86 @@
 }
 
 /* Teams */
+.team-container {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.team-wrapper {
+    position: relative;
+}
+
+.team-wrapper.disabled {
+    cursor: default;
+}
+
+.team-wrapper.disabled .team-fullname {
+    display: none;
+}
+
+.team-wrapper:not(.disabled) .team {
+    cursor: pointer;
+}
+
+.team-fullname {
+    position: absolute;
+
+    left: 0;
+
+    opacity: 0;
+    visibility: hidden;
+
+    pointer-events: none;
+
+    padding: 6px 10px;
+
+    background-color: whitesmoke;
+    color: #333;
+
+    border-radius: 6px;
+
+    width: 80%;
+
+    font-size: 0.75rem;
+    font-weight: 500;
+
+    transition: opacity 0.2s ease,
+        transform 0.2s ease,
+        visibility .2s ease;
+    z-index: 20;
+}
+
+/* Home team -> tooltip above */
+.home-team .team-fullname {
+    bottom: calc(100% + 6px);
+    transform: translateY(6px);
+}
+
+/* Away team -> tooltip below */
+.away-team .team-fullname {
+    top: calc(100% + 6px);
+    transform: translateY(-6px);
+}
+
+/* Hover animation */
+.home-team:not(.disabled):hover .team-fullname,
+.away-team:not(.disabled):hover .team-fullname {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.final-match .team-fullname, .third-place .team-fullname {
+    width: calc(100% - 20px);
+}
+
 .team {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    background-color: white;
+    background-color: #EEE;
     color: #333;
 
     margin-bottom: 5px;
@@ -69,6 +143,7 @@
 }
 
 .team {
+    cursor: pointer;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

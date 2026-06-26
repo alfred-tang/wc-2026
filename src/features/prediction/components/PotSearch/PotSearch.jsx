@@ -180,6 +180,7 @@ function PotSearch({ pots }) {
                 }}
                 rectProps={{
                     height: "99.7%",
+                    width: "99.7%",
                     rx: "8",
                     ry: "8",
                 }}
