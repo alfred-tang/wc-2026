@@ -57,9 +57,7 @@ function useUserTeams(currentUser) {
         const { error } = await supabase.from("user_teams").insert([
             {
                 user_id: currentUser.user_id,
-
                 team_id: team.team_id,
-
                 pot: Number(potId),
             },
         ]);
@@ -76,7 +74,6 @@ function useUserTeams(currentUser) {
 
             [team.team_id]: {
                 username: currentUser.username,
-
                 pot: Number(potId),
             },
         }));

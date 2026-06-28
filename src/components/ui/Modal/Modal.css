@@ -114,7 +114,7 @@
     stroke: whitesmoke;
     stroke-width: 2;
 
-    stroke-dasharray: 2800;
+    stroke-dasharray: 4200;
     stroke-dashoffset: 2400;
 
     animation: sketchIn 0.7s 0.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;

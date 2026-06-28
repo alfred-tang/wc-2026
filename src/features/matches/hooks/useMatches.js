@@ -1,4 +1,8 @@
 import { useState, useEffect } from "react";
+
+import { BRACKET_PROGRESSION } from "../../standings/components/Bracket/bracketProgression";
+
+import { getWinner } from "../../../utils/knockout";
 import supabase from "../../../utils/supabase";
 
 let cachedMatches = null;
@@ -48,6 +52,12 @@ const useMatches = () => {
         fetchMatches();
     }, []);
 
+    const updateLocalMatches = (updater) => {
+        setMatches((prev) => prev.map(updater));
+
+        cachedMatches = cachedMatches?.map(updater)
+    }
+
     const updateMatchScore = async (
         matchId,
         homeScore,
@@ -70,21 +80,7 @@ const useMatches = () => {
             return false;
         }
 
-        setMatches((prev) =>
-            prev.map((match) =>
-                match.match_id === matchId
-                    ? {
-                        ...match,
-                        home_score: homeScore,
-                        away_score: awayScore,
-                        home_discipline: homeDiscipline,
-                        away_discipline: awayDiscipline,
-                    }
-                    : match,
-            ),
-        );
-
-        cachedMatches = cachedMatches?.map((match) =>
+        updateLocalMatches((match) =>
             match.match_id === matchId
                 ? {
                     ...match,
@@ -95,6 +91,48 @@ const useMatches = () => {
                 }
                 : match,
         );
+
+        const currentMatch = {
+            ...matches.find(match => match.match_id === matchId),
+            home_score: homeScore,
+            away_score: awayScore,
+            home_discipline: homeDiscipline,
+            away_discipline: awayDiscipline,
+        };
+
+        const progression =
+            BRACKET_PROGRESSION[currentMatch.match_order];
+
+        if (!progression) {
+            // Final has no next match
+            return true;
+        }
+
+        const winner = getWinner(currentMatch);
+
+        const updateData = { [progression.position]: winner.team_id };
+
+        const { updateError } = await supabase
+            .from("matches")
+            .update(updateData)
+            .eq("match_order", progression.next);
+
+        if (updateError) {
+            console.log(updateError);
+            return false;
+        }
+
+        updateLocalMatches((match) => {
+            if (match.match_order !== progression.next)
+                return match;
+
+            return {
+                ...match,
+                ...(progression.position === "home_team"
+                    ? { home_info: winner }
+                    : { away_info: winner }),
+            };
+        })
 
         return true;
     };

@@ -26,6 +26,13 @@
     justify-content: flex-start;
 }
 
+.penalty-score {
+    font-size: 0.75rem;
+    color: #666;
+    font-weight: 400;
+    margin: 0 2px;
+}
+
 .team-name {
     width: 40%;
     display: flex;

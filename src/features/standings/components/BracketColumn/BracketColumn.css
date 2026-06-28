@@ -20,18 +20,18 @@
 
 @media (max-width: 768px) {
     .round32 {
-        gap: 20px;
+        gap: 40px;
     }
 
     .round16 {
-        gap: 155px;
+        gap: 200px;
     }
 
     .quarter {
-        gap: 425px;
+        gap: 520px;
     }
 
     .semi {
-        gap: 950px;
+        gap: 1150px;
     }
 }

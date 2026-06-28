@@ -1,5 +1,10 @@
 import { memo, useCallback, useMemo } from "react";
 
+import {
+    getPlaceholder,
+    getRunnerUpPlaceholder,
+} from "../Bracket/bracketProgression";
+
 import "./BracketCard.css";
 
 const dateFormatter = new Intl.DateTimeFormat("en-GB", {
@@ -39,6 +44,35 @@ function BracketCard({ match, cardId, registerRef, large = false }) {
 
     if (!match) return null;
 
+    const showPenalty =
+        match.stage !== "First Stage" &&
+        match.home_score != null &&
+        match.away_score != null &&
+        match.home_score === match.away_score &&
+        match.home_discipline != null &&
+        match.away_discipline != null;
+
+    const homeWon = showPenalty
+        ? match.home_discipline > match.away_discipline
+        : match.home_score > match.away_score;
+
+    const awayWon = showPenalty
+        ? match.away_discipline > match.home_discipline
+        : match.away_score > match.home_score;
+
+    const placeholderGetter =
+        match.match_order === 103
+            ? getRunnerUpPlaceholder
+            : getPlaceholder;
+
+    const homeLabel =
+        match.home_info?.short_name?.toUpperCase() ??
+        placeholderGetter(match.match_order, "home_team");
+
+    const awayLabel =
+        match.away_info?.short_name?.toUpperCase() ??
+        placeholderGetter(match.match_order, "away_team");
+
     return (
         <div ref={setMatchRef} className="match-wrapper">
             <div className="match-header">M{match.match_order}</div>
@@ -49,11 +83,12 @@ function BracketCard({ match, cardId, registerRef, large = false }) {
                 </div>
 
                 <div
-                    className={`team-wrapper home-team ${
-                        match.home_info?.short_name ? "" : "disabled"
-                    }`}
+                    className={`team-wrapper home-team ${match.home_info?.short_name ? "" : "disabled"
+                        }`}
                 >
-                    <div className="team">
+                    <div
+                        className={`team ${homeWon ? "winner" : awayWon ? "loser" : ""}`}
+                    >
                         <div className="team-container">
                             {match?.home_info?.short_name && (
                                 <div
@@ -68,25 +103,31 @@ function BracketCard({ match, cardId, registerRef, large = false }) {
                                     />
                                 </div>
                             )}
-                            <span>
-                                {match.home_info?.short_name.toUpperCase() || "TBD"}
-                            </span>
+                            <span>{homeLabel}</span>
                         </div>
 
-                        <span>{match.home_score ?? ""}</span>
+                        <div className="team-score">
+                            <span
+                                className={`score ${homeWon ? "winner" : awayWon ? "loser" : ""}`}
+                            >
+                                {match.home_score ?? ""}
+                            </span>
+                            {showPenalty && (
+                                <span className="penalty-score">({match.home_discipline})</span>
+                            )}
+                        </div>
                     </div>
 
-                    <div className="team-fullname">
-                        {match?.home_info?.name}
-                    </div>
+                    <div className="team-fullname">{match?.home_info?.name}</div>
                 </div>
 
                 <div
-                    className={`team-wrapper away-team ${
-                        match.away_info?.short_name ? "" : "disabled"
-                    }`}
+                    className={`team-wrapper away-team ${match.away_info?.short_name ? "" : "disabled"
+                        }`}
                 >
-                    <div className="team">
+                    <div
+                        className={`team ${awayWon ? "winner" : homeWon ? "loser" : ""}`}
+                    >
                         <div className="team-container">
                             {match?.away_info?.short_name && (
                                 <div
@@ -101,17 +142,22 @@ function BracketCard({ match, cardId, registerRef, large = false }) {
                                     />
                                 </div>
                             )}
-                            <span>
-                                {match.away_info?.short_name.toUpperCase() || "TBD"}
-                            </span>
+                            <span>{awayLabel}</span>
                         </div>
 
-                        <span>{match.away_score ?? ""}</span>
+                        <div className="team-score">
+                            <span
+                                className={`score ${awayWon ? "winner" : homeWon ? "loser" : ""}`}
+                            >
+                                {match.away_score ?? ""}
+                            </span>
+                            {showPenalty && (
+                                <span className="penalty-score">({match.away_discipline})</span>
+                            )}
+                        </div>
                     </div>
 
-                    <div className="team-fullname">
-                        {match?.away_info?.name}
-                    </div>
+                    <div className="team-fullname">{match?.away_info?.name}</div>
                 </div>
             </div>
         </div>

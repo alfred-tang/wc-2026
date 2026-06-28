@@ -16,8 +16,10 @@ const MatchRow = ({ match, selected, onEdit }) => {
         stadiums,
         home_info,
         home_score,
+        home_discipline,
         away_info,
         away_score,
+        away_discipline,
     } = match;
     const matchDate = new Date(kick_off);
     const now = new Date();
@@ -40,13 +42,21 @@ const MatchRow = ({ match, selected, onEdit }) => {
         matchDisplay = `${home_score} - ${away_score}`;
     }
 
+    const showPenalty =
+        stage !== "First Stage" &&
+        home_score != null &&
+        away_score != null &&
+        home_score === away_score &&
+        home_discipline != null &&
+        away_discipline != null;
+
     return (
         <div
             className="match-row transparent-card"
             onClick={() => {
-                if (new Date() >= matchDate) {
-                    onEdit(match);
-                }
+                // if (new Date() >= matchDate) {
+                onEdit(match);
+                // }
             }}
         >
             <div className="match-extra">
@@ -91,17 +101,45 @@ const MatchRow = ({ match, selected, onEdit }) => {
                 <div className="match-time">
                     {home_score !== null && away_score !== null ? (
                         <>
+                            {showPenalty && (
+                                <span className="penalty-score">
+                                    ({home_discipline})
+                                </span>
+                            )}
+
                             <span
-                                className={`score ${home_score > away_score ? "winner" : home_score < away_score ? "loser" : ""}`}
+                                className={`score ${home_score > away_score ||
+                                        (showPenalty && home_discipline > away_discipline)
+                                        ? "winner"
+                                        : home_score < away_score ||
+                                            (showPenalty && home_discipline < away_discipline)
+                                            ? "loser"
+                                            : ""
+                                    }`}
                             >
                                 {home_score}
                             </span>
+
                             <span className="score-separator">-</span>
+
                             <span
-                                className={`score ${away_score > home_score ? "winner" : away_score < home_score ? "loser" : ""}`}
+                                className={`score ${away_score > home_score ||
+                                        (showPenalty && away_discipline > home_discipline)
+                                        ? "winner"
+                                        : away_score < home_score ||
+                                            (showPenalty && away_discipline < home_discipline)
+                                            ? "loser"
+                                            : ""
+                                    }`}
                             >
                                 {away_score}
                             </span>
+
+                            {showPenalty && (
+                                <span className="penalty-score">
+                                    ({away_discipline})
+                                </span>
+                            )}
                         </>
                     ) : (
                         matchDisplay

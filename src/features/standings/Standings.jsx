@@ -29,6 +29,8 @@ function Standings() {
     if (standingsError) return <p>{standingsError}</p>;
     if (matchesError) return <p>{matchesError}</p>;
 
+    console.log(matches);
+
     return (
         <>
             <button
@@ -42,7 +44,8 @@ function Standings() {
                 isOpen={showBracket}
                 onClose={() => setShowBracket(false)}
                 rectProps={{
-                    height: "99.4%",
+                    height: "99.7%",
+                    width: "99.9%"
                 }}
             >
                 <Bracket matches={matches} />

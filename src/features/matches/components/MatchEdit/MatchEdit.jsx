@@ -21,6 +21,12 @@ function MatchEdit({ match, onSave, onClose }) {
 
     if (!match) return null;
 
+    const isKnockout = match.stage !== "First Stage";
+    const isDraw =
+        homeScore !== "" &&
+        awayScore !== "" &&
+        Number(homeScore) === Number(awayScore);
+
     return (
         <div className="match-edit">
             <h2>
@@ -50,7 +56,7 @@ function MatchEdit({ match, onSave, onClose }) {
             </div>
 
             <div className="edit-section">
-                <h3>Discipline</h3>
+                <h3>{isKnockout && isDraw ? "Penalty Shootout" : "Discipline"}</h3>
 
                 <div className="score-inputs">
                     <input
