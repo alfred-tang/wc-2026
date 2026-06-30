@@ -1,3 +1,10 @@
+:root {
+    --round32-gap: 50px;
+    --round16-gap: 200px;
+    --quarter-gap: 500px;
+    --semi-gap: 0px;
+}
+
 .round {
     height: 100%;
     display: flex;
@@ -7,31 +14,22 @@
 
 /* Round Spacing */
 .round32 {
-    gap: 50px;
+    gap: var(--round32-gap);
 }
 
 .round16 {
-    gap: 200px;
+    gap: var(--round16-gap);
 }
 
 .quarter {
-    gap: 500px;
+    gap: var(--quarter-gap);
 }
 
 @media (max-width: 768px) {
-    .round32 {
-        gap: 40px;
-    }
-
-    .round16 {
-        gap: 200px;
-    }
-
-    .quarter {
-        gap: 520px;
-    }
-
-    .semi {
-        gap: 1150px;
+    :root {
+        --round32-gap: 40px;
+        --round16-gap: 200px;
+        --quarter-gap: 520px;
+        --semi-gap: 1150px;
     }
 }

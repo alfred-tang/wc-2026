@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 
 import Modal from "../../../../components/ui/Modal/Modal";
 import MatchRow from "../MatchRow/MatchRow";
@@ -16,6 +16,8 @@ const MatchContainer = ({ matches, updateMatchScore }) => {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [editingMatch, setEditingMatch] = useState(null);
     const [filters, setFilters] = useState({});
+
+    const firstUnplayedSectionRef = useRef(null);
 
     const options = ["Date", "Stage"];
 
@@ -91,6 +93,40 @@ const MatchContainer = ({ matches, updateMatchScore }) => {
         }, {});
     }, [timeSorted, selected]);
 
+    const firstUnplayedDate = useMemo(() => {
+        const firstUnplayed = timeSorted.find(
+            (match) =>
+                match.home_score == null ||
+                match.away_score == null
+        );
+
+        if (!firstUnplayed) {
+            return null;
+        }
+
+        const date = new Date(firstUnplayed.kick_off);
+
+        return `${dayNames[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]
+            } ${date.getFullYear()}`;
+    }, [timeSorted]);
+
+    useEffect(() => {
+        if (selected !== "Date" || !firstUnplayedDate) return;
+
+        requestAnimationFrame(() => {
+            const element = firstUnplayedSectionRef.current;
+            if (!element) return;
+
+            const headerOffset = window.innerWidth < 768 ? 120 : 125;
+            const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+
+            window.scrollTo({
+                top: elementPosition - headerOffset,
+                behavior: "smooth",
+            });
+        });
+    }, [selected, firstUnplayedDate]);
+
     return (
         <div className="match-list">
             <div className="toolbar">
@@ -144,19 +180,28 @@ const MatchContainer = ({ matches, updateMatchScore }) => {
                         }
                         return 0;
                     })
-                    .map(([key, matches]) => (
-                        <div className="match-row-wrapper" key={key}>
-                            <h2>{key}</h2>
-                            {matches.map((match) => (
-                                <MatchRow
-                                    key={match.match_id}
-                                    match={match}
-                                    selected={selected}
-                                    onEdit={setEditingMatch}
-                                />
-                            ))}
-                        </div>
-                    ))}
+                    .map(([key, matches]) => {
+                        const isFirstUnplayed =
+                            selected === "Date" &&
+                            key === firstUnplayedDate;
+                        return (
+                            <div
+                                className="match-row-wrapper"
+                                key={key}
+                                ref={isFirstUnplayed ? firstUnplayedSectionRef : null}
+                            >
+                                <h2>{key}</h2>
+                                {matches.map((match) => (
+                                    <MatchRow
+                                        key={match.match_id}
+                                        match={match}
+                                        selected={selected}
+                                        onEdit={setEditingMatch}
+                                    />
+                                ))}
+                            </div>
+                        );
+                    })}
             </div>
             <Modal
                 isOpen={editingMatch}

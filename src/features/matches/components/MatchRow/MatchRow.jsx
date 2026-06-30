@@ -54,9 +54,9 @@ const MatchRow = ({ match, selected, onEdit }) => {
         <div
             className="match-row transparent-card"
             onClick={() => {
-                // if (new Date() >= matchDate) {
-                onEdit(match);
-                // }
+                if (new Date() >= matchDate) {
+                    onEdit(match);
+                }
             }}
         >
             <div className="match-extra">

@@ -147,20 +147,34 @@
 
     font-size: small;
     max-width: 80%;
+    transition: all 0.2s ease-in;
 }
 
 .team:hover {
     background-color: whitesmoke;
 }
 
-.team.winner {
-    background: linear-gradient(90deg, #d4af37, #f7e27c);
-    color: #222;
+.team.winner:hover {
+    border: 1px solid mediumseagreen;
 }
 
-.team.loser {
+.team.loser:hover {
     opacity: 0.7;
-    filter: grayscale(0.7);
+    border: 1px solid red;
+}
+
+.team-score {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.team-score .penalty-score {
+    font-size: 0.7rem;
+}
+
+.team-score .score.winner {
+    font-weight: 400;
 }
 
 /* Center Stage */

@@ -107,14 +107,14 @@ function BracketCard({ match, cardId, registerRef, large = false }) {
                         </div>
 
                         <div className="team-score">
+                            {showPenalty && (
+                                <span className="penalty-score">({match.home_discipline})</span>
+                            )}
                             <span
                                 className={`score ${homeWon ? "winner" : awayWon ? "loser" : ""}`}
                             >
                                 {match.home_score ?? ""}
                             </span>
-                            {showPenalty && (
-                                <span className="penalty-score">({match.home_discipline})</span>
-                            )}
                         </div>
                     </div>
 
@@ -146,14 +146,14 @@ function BracketCard({ match, cardId, registerRef, large = false }) {
                         </div>
 
                         <div className="team-score">
+                            {showPenalty && (
+                                <span className="penalty-score">({match.away_discipline})</span>
+                            )}
                             <span
                                 className={`score ${awayWon ? "winner" : homeWon ? "loser" : ""}`}
                             >
                                 {match.away_score ?? ""}
                             </span>
-                            {showPenalty && (
-                                <span className="penalty-score">({match.away_discipline})</span>
-                            )}
                         </div>
                     </div>
 
