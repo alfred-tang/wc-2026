@@ -25,6 +25,10 @@
     gap: var(--quarter-gap);
 }
 
+.semi {
+    gap: var(--semi-gap);
+}
+
 @media (max-width: 768px) {
     :root {
         --round32-gap: 40px;

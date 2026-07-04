@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import Modal from "../../components/ui/Modal/Modal";
+import Loading from "../../components/layout/Loading/Loading";
 import Bracket from "./components/Bracket/Bracket";
 
 import StandingContainer from "./components/StandingContainer/StandingContainer";
@@ -24,12 +25,10 @@ function Standings() {
         loading: matchesLoading,
     } = useMatches();
 
-    if (standingsLoading || matchesLoading) return <p>Loading standings...</p>;
+    if (standingsLoading || matchesLoading) return <Loading />;
 
     if (standingsError) return <p>{standingsError}</p>;
     if (matchesError) return <p>{matchesError}</p>;
-
-    console.log(matches);
 
     return (
         <>

@@ -20,11 +20,17 @@ function PotContainer({
 }) {
     const [selectedResult, setSelectedResult] = useState(null);
 
+    const isPotAvailable = (potList) => {
+        return potList.some(
+            (team) => !team.eliminated && !takenTeams.includes(team.team_id),
+        );
+    };
+
     const pickRandomTeam = async (potId) => {
         if (!currentUser) return;
 
         const availableTeams = pots[potId].filter(
-            (team) => !takenTeams.includes(team.team_id),
+            (team) => !team.eliminated && !takenTeams.includes(team.team_id),
         );
 
         if (!availableTeams.length) {
@@ -75,7 +81,7 @@ function PotContainer({
                             disabled={
                                 !currentUser ||
                                 userTakenPots.includes(Number(potName)) ||
-                                potList.every((team) => takenTeams.includes(team.team_id))
+                                !isPotAvailable(potList)
                             }
                             onClick={() => pickRandomTeam(potName)}
                         >

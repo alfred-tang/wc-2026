@@ -5,7 +5,7 @@ import "./PotTeam.css";
 function PotTeam({ team, owner, disabled }) {
     return (
         <div
-            className={`pot-team transparent-card pot-${team.flag} ${disabled ? "disabled" : ""}`}
+            className={`pot-team transparent-card pot-${team.flag} ${disabled ? "disabled" : ""} ${team.eliminated ? "eliminated" : ""}`}
             style={{
                 "--color-hover": `var(--team-${team.flag})`,
             }}
@@ -16,7 +16,12 @@ function PotTeam({ team, owner, disabled }) {
                 loading="lazy"
             />
             <div>
-                {team.name}{" "}
+                <div className="pot-team-title">
+                    <span>{team.name}</span>
+                    {team.eliminated && (
+                        <span className="eliminated-badge">ELIMINATED</span>
+                    )}
+                </div>
                 {owner && (
                     <small>(Owned by: {owner.username})</small>
                 )}

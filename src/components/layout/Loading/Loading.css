@@ -1,0 +1,87 @@
+.loading-screen {
+    min-height: calc(100vh - var(--header-height, 150px));
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-content {
+    font-family: "FWC2026 Condensed", sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    z-index: 2;
+}
+
+.loading-words {
+    width: fit-content;
+    height: 1.4em;
+    overflow: hidden;
+
+    color: var(--light-gold);
+    font-size: 2.25rem;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+}
+
+.loading-words::before {
+    content:
+        "R\A"
+        "Re\A"
+        "Rea\A"
+        "Read\A"
+        "Ready\A"
+        "Ready.\A"
+        "Ready..\A"
+        "Ready...\A"
+        "Ready..\A"
+        "Ready.\A"
+        "Ready\A"
+        "Read\A"
+        "Rea\A"
+        "Re\A"
+        "R\A"
+        "S\A"
+        "Se\A"
+        "Set\A"
+        "Set.\A"
+        "Set..\A"
+        "Set.\A"
+        "Set\A"
+        "Se\A"
+        "S\A"
+        "K\A"
+        "Ki\A"
+        "Kic\A"
+        "Kick\A"
+        "Kick-\A"
+        "Kick-o\A"
+        "Kick-of\A"
+        "Kick-off.\A"
+        "Kick-off..\A"
+        "Kick-off...\A"
+        "Kick-off..\A"
+        "Kick-off.\A"
+        "Kick-of\A"
+        "Kick-o\A"
+        "Kick-\A"
+        "Kick\A"
+        "Kic\A"
+        "Ki\A"
+        "K\A";
+
+    white-space: pre;
+    display: inline-block;
+
+    animation: loadingMorph 4.5s steps(43) infinite;
+}
+
+@keyframes loadingMorph {
+    to {
+        transform: translateY(-100%);
+    }
+}

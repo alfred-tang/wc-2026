@@ -120,6 +120,38 @@
     background-color: rgba(120, 120, 120, 0.4);
 }
 
+.toggle-eliminated-btn {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+
+    background: transparent;
+    border: 1px solid #333;
+    border-radius: 6px;
+
+    color: #333;
+    font-size: 0.875rem;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.toggle-eliminated-btn:hover {
+    background: #333;
+    color: whitesmoke;
+}
+
+.eliminated-row {
+    opacity: .65;
+}
+
+.team-cell.eliminated .board-team-name span:first-of-type {
+    text-decoration: line-through;
+}
+
+.team-cell.eliminated .flag-container img {
+    filter: grayscale(100%);
+}
+
 .board-team-name {
     display: flex;
     align-items: center;

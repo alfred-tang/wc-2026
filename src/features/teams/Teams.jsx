@@ -1,4 +1,6 @@
+import Loading from "../../components/layout/Loading/Loading";
 import TeamTable from "./components/TeamTable/TeamTable";
+
 import useTeams from "./hooks/useTeams";
 
 import "./Teams.css";
@@ -6,7 +8,7 @@ import "./Teams.css";
 function Teams() {
     const { teams, error, loading } = useTeams();
 
-    if (loading) return <p>Loading teams...</p>;
+    if (loading) return <Loading />;
     if (error) return <p>{error}</p>;
 
     return (

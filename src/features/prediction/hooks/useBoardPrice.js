@@ -29,6 +29,7 @@ function useBoardPrice(teamOwners, pots) {
                 flag: team.flag,
                 pot: info.pot,
                 price,
+                eliminated: team.eliminated
             });
 
             grouped[username].totalPrice += price;

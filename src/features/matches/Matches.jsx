@@ -1,4 +1,6 @@
+import Loading from "../../components/layout/Loading/Loading";
 import MatchContainer from "./components/MatchContainer/MatchContainer";
+
 import useMatches from "./hooks/useMatches";
 
 import "./Matches.css";
@@ -7,7 +9,7 @@ function Matches() {
 
     const { matches, error, loading, updateMatchScore } = useMatches();
 
-    if (loading) return <p>Loading matches...</p>;
+    if (loading) return <Loading />;
     if (error) return <p>{error}</p>;
 
     return (

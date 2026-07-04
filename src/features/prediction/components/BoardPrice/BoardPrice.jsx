@@ -27,6 +27,7 @@ function BoardPrice({
     const [pendingSwaps, setPendingSwaps] = useState([]);
     const [selectedSwap, setSelectedSwap] = useState(null);
     const [localUsers, setLocalUsers] = useState(groupedUsers);
+    const [expandedUsers, setExpandedUsers] = useState(new Set());
 
     const pendingTeamIds = new Set(
         pendingSwaps.flatMap((swap) => [swap.from.teamId, swap.to.teamId]),
@@ -151,6 +152,15 @@ function BoardPrice({
         );
     };
 
+    const toggleUser = (username) => {
+        setExpandedUsers((prev) => {
+            const next = new Set(prev);
+            if (next.has(username)) next.delete(username);
+            else next.add(username);
+            return next;
+        });
+    };
+
     return (
         <>
             <div className={`header-board ${fullscreenBoard ? "fullscreen" : ""}`}>
@@ -198,69 +208,97 @@ function BoardPrice({
                 </thead>
 
                 <tbody>
-                    {localUsers.map((user) =>
-                        user.selections.map((selection, index) => {
-                            const isSelected = selectedSwap?.teamId === selection.teamId;
-                            const isSamePot = highlightedPot === selection.pot && !isSelected;
-                            const isPending = pendingTeamIds.has(selection.teamId);
+                    {localUsers.map((user) => {
+                        const activeSelections = user.selections.filter((s) => !s.eliminated);
+                        const eliminatedSelections = user.selections.filter((s) => s.eliminated);
+                        const visibleSelections = expandedUsers.has(user.username)
+                            ? user.selections
+                            : activeSelections;
 
-                            return (
-                                <tr key={`${selection.teamId}-${user.username}`}>
-                                    {index === 0 && (
-                                        <td className="name-cell" rowSpan={user.selections.length}>
-                                            {user.username}
-                                        </td>
-                                    )}
-                                    <td
-                                        className={`
-                                        team-cell 
-                                        ${editMode ? "editable" : ""}
-                                        ${isSelected ? "selected" : ""}
-                                        ${isPending ? "pending" : ""}
-                                        ${isSamePot ? "same-pot" : ""}
-                                    `}
-                                        onClick={() => {
-                                            handleSwapSelect(selection, user.username);
-                                        }}
-                                    >
-                                        <div className="board-team-name">
-                                            <div
-                                                className="flag-container"
-                                                style={{
-                                                    "--flag-width": "32px",
+                        return (
+                            <>
+                                {visibleSelections.map((selection, index) => {
+                                    const isSelected = selectedSwap?.teamId === selection.teamId;
+                                    const isSamePot = highlightedPot === selection.pot && !isSelected;
+                                    const isPending = pendingTeamIds.has(selection.teamId);
+
+                                    return (
+                                        <tr
+                                            key={`${selection.teamId}-${user.username}`}
+                                            className={selection.eliminated ? "eliminated-row" : ""}
+                                        >
+                                            {index === 0 && (
+                                                <td className="name-cell" rowSpan={visibleSelections.length + (eliminatedSelections.length ? 1 : 0)}>
+                                                    {user.username}
+                                                </td>
+                                            )}
+                                            <td
+                                                className={`
+                                                team-cell 
+                                                ${editMode ? "editable" : ""}
+                                                ${isSelected ? "selected" : ""}
+                                                ${isPending ? "pending" : ""}
+                                                ${isSamePot ? "same-pot" : ""}
+                                                ${selection.eliminated ? "eliminated" : ""}
+                                            `}
+                                                onClick={() => {
+                                                    handleSwapSelect(selection, user.username);
                                                 }}
                                             >
-                                                <img
-                                                    src={`https://flagcdn.com/h120/${selection.flag}.png`}
-                                                    srcSet={`https://flagcdn.com/h240/${selection.flag}.png 2x`}
-                                                    alt={selection.teamName}
-                                                    loading="lazy"
-                                                />
-                                            </div>
-                                            <span>{selection.teamName}</span>
-                                        </div>
-                                        <button
-                                            className="delete-team-btn"
-                                            onClick={(e) => {
-                                                e.stopPropagation();
-                                                handleDeleteSelection(selection);
-                                            }}
-                                        >
-                                            <PiMinusBold />
-                                        </button>
-                                    </td>
-                                    <td>{potNames[selection.pot].price}k</td>
+                                                <div className="board-team-name">
+                                                    <div
+                                                        className="flag-container"
+                                                        style={{
+                                                            "--flag-width": "32px",
+                                                        }}
+                                                    >
+                                                        <img
+                                                            src={`https://flagcdn.com/h120/${selection.flag}.png`}
+                                                            srcSet={`https://flagcdn.com/h240/${selection.flag}.png 2x`}
+                                                            alt={selection.teamName}
+                                                            loading="lazy"
+                                                        />
+                                                    </div>
+                                                    <span>{selection.teamName}</span>
+                                                </div>
+                                                <button
+                                                    className="delete-team-btn"
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        handleDeleteSelection(selection);
+                                                    }}
+                                                >
+                                                    <PiMinusBold />
+                                                </button>
+                                            </td>
+                                            <td>{potNames[selection.pot].price}k</td>
 
-                                    {index === 0 && (
-                                        <td className="price-cell" rowSpan={user.selections.length}>
-                                            {user.totalPrice}k
+                                            {index === 0 && (
+                                                <td className="price-cell" rowSpan={visibleSelections.length + (eliminatedSelections.length ? 1 : 0)}>
+                                                    {user.totalPrice}k
+                                                </td>
+                                            )}
+                                        </tr>
+                                    );
+                                })}
+
+                                {eliminatedSelections.length > 0 && (
+                                    <tr key={`${user.username}-toggle`}>
+                                        <td colSpan={2}>
+                                            <button
+                                                className="toggle-eliminated-btn"
+                                                onClick={() => toggleUser(user.username)}
+                                            >
+                                                {expandedUsers.has(user.username)
+                                                    ? `Hide ${eliminatedSelections.length} eliminated team(s)`
+                                                    : `Show ${eliminatedSelections.length} eliminated team(s)`}
+                                            </button>
                                         </td>
-                                    )}
-                                </tr>
-                            );
-                        }),
-                    )}
-
+                                    </tr>
+                                )}
+                            </>
+                        );
+                    })}
                     <tr className="summary-row">
                         <th colSpan="3">Total Prize Pool</th>
                         <td className="summary-cell">{totalSpent}k</td>

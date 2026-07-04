@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import { BRACKET_PROGRESSION } from "../../standings/components/Bracket/bracketProgression";
 
-import { getWinner } from "../../../utils/knockout";
+import { getWinner, getLoser } from "../../../utils/knockout";
 import supabase from "../../../utils/supabase";
 
 let cachedMatches = null;
@@ -109,6 +109,7 @@ const useMatches = () => {
         }
 
         const winner = getWinner(currentMatch);
+        const loser = getLoser(currentMatch);
 
         const updateData = { [progression.position]: winner.team_id };
 

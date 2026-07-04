@@ -20,10 +20,39 @@
     height: 64px;
 }
 
+.pot-team.eliminated img {
+    filter: grayscale(40%) brightness(0.9);
+}
+
+.pot-team-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.eliminated-badge {
+    position: absolute;
+
+    padding: 2px 8px;
+
+    border-radius: 999px;
+
+    background: #b71c1c;
+    color: #fff;
+
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    z-index: 2;
+}
+
 .pot-team.disabled {
-    opacity: 0.35;
-    filter: grayscale(100%);
-    pointer-events: none;
+    opacity: 0.55;
+    cursor: not-allowed;
+    filter: saturate(0.55);
 }
 
 .pot-teams:hover .pot-team {
