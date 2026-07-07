@@ -213,7 +213,9 @@ function BoardPrice({
                         const eliminatedSelections = user.selections.filter((s) => s.eliminated);
                         const visibleSelections = expandedUsers.has(user.username)
                             ? user.selections
-                            : activeSelections;
+                            : activeSelections.length > 0
+                                ? activeSelections
+                                : [eliminatedSelections[0]];
 
                         return (
                             <>
@@ -221,6 +223,9 @@ function BoardPrice({
                                     const isSelected = selectedSwap?.teamId === selection.teamId;
                                     const isSamePot = highlightedPot === selection.pot && !isSelected;
                                     const isPending = pendingTeamIds.has(selection.teamId);
+
+                                    const hiddenEliminated =
+                                        !expandedUsers.has(user.username) && selection.eliminated;
 
                                     return (
                                         <tr
@@ -232,46 +237,64 @@ function BoardPrice({
                                                     {user.username}
                                                 </td>
                                             )}
-                                            <td
-                                                className={`
-                                                team-cell 
-                                                ${editMode ? "editable" : ""}
-                                                ${isSelected ? "selected" : ""}
-                                                ${isPending ? "pending" : ""}
-                                                ${isSamePot ? "same-pot" : ""}
-                                                ${selection.eliminated ? "eliminated" : ""}
-                                            `}
-                                                onClick={() => {
-                                                    handleSwapSelect(selection, user.username);
-                                                }}
-                                            >
-                                                <div className="board-team-name">
-                                                    <div
-                                                        className="flag-container"
-                                                        style={{
-                                                            "--flag-width": "32px",
-                                                        }}
-                                                    >
-                                                        <img
-                                                            src={`https://flagcdn.com/h120/${selection.flag}.png`}
-                                                            srcSet={`https://flagcdn.com/h240/${selection.flag}.png 2x`}
-                                                            alt={selection.teamName}
-                                                            loading="lazy"
-                                                        />
-                                                    </div>
-                                                    <span>{selection.teamName}</span>
-                                                </div>
-                                                <button
-                                                    className="delete-team-btn"
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        handleDeleteSelection(selection);
+                                            {hiddenEliminated ? (
+                                                <>
+                                                    <td className="hidden-eliminated">
+                                                        <span className="hidden-count-badge">
+                                                            {eliminatedSelections.length}
+                                                        </span>
+                                                        <span>
+                                                            Team{eliminatedSelections.length > 1 ? "s" : ""} hidden
+                                                        </span>
+                                                    </td>
+                                                    <td>—</td>
+                                                </>
+                                            ) : (
+                                                <td
+                                                    className={`
+                                                    team-cell 
+                                                    ${editMode ? "editable" : ""}
+                                                    ${isSelected ? "selected" : ""}
+                                                    ${isPending ? "pending" : ""}
+                                                    ${isSamePot ? "same-pot" : ""}
+                                                    ${selection.eliminated ? "eliminated" : ""}
+                                                `}
+                                                    onClick={() => {
+                                                        handleSwapSelect(selection, user.username);
                                                     }}
                                                 >
-                                                    <PiMinusBold />
-                                                </button>
-                                            </td>
-                                            <td>{potNames[selection.pot].price}k</td>
+                                                    <div className="board-team-name">
+                                                        <div
+                                                            className="flag-container"
+                                                            style={{
+                                                                "--flag-width": "32px",
+                                                            }}
+                                                        >
+                                                            <img
+                                                                src={`https://flagcdn.com/h120/${selection.flag}.png`}
+                                                                srcSet={`https://flagcdn.com/h240/${selection.flag}.png 2x`}
+                                                                alt={selection.teamName}
+                                                                loading="lazy"
+                                                            />
+                                                        </div>
+                                                        <span>{selection.teamName}</span>
+                                                    </div>
+                                                    <button
+                                                        className="delete-team-btn"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            handleDeleteSelection(selection);
+                                                        }}
+                                                    >
+                                                        <PiMinusBold />
+                                                    </button>
+                                                </td>
+                                            )}
+                                            {!hiddenEliminated && (
+                                                <td className="pot-cell">
+                                                    {potNames[selection.pot].price}k
+                                                </td>
+                                            )}
 
                                             {index === 0 && (
                                                 <td className="price-cell" rowSpan={visibleSelections.length + (eliminatedSelections.length ? 1 : 0)}>

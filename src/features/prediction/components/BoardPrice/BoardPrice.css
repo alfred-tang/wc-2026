@@ -266,6 +266,32 @@
     display: none;
 }
 
+.hidden-eliminated {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    color: #333;
+}
+
+.hidden-count-badge {
+    width: 1.75rem;
+    height: 1.75rem;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #333;
+    color: whitesmoke;
+
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
 @keyframes pendingMove {
     from {
         background-position: 0 0;
