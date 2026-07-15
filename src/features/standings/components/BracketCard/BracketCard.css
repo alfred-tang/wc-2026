@@ -117,6 +117,9 @@
 }
 
 .final-match .team-fullname, .third-place .team-fullname {
+    color: whitesmoke;
+    background-color: darkgrey;
+    border-radius: 5px;
     width: calc(100% - 20px);
 }
 

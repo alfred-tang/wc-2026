@@ -113,7 +113,7 @@ const useMatches = () => {
 
         const updateData = { [progression.position]: winner.team_id };
 
-        const { updateError } = await supabase
+        const { error: updateError } = await supabase
             .from("matches")
             .update(updateData)
             .eq("match_order", progression.next);
@@ -121,6 +121,32 @@ const useMatches = () => {
         if (updateError) {
             console.log(updateError);
             return false;
+        }
+
+        if (progression.loserTo) {
+            const { error: loserUpdateError } = await supabase
+                .from("matches")
+                .update({
+                    [progression.position]: loser.team_id,
+                })
+                .eq("match_order", progression.loserTo);
+
+            if (loserUpdateError) {
+                console.log(loserUpdateError);
+                return false;
+            }
+
+            updateLocalMatches((match) => {
+                if (match.match_order !== progression.loserTo)
+                    return match;
+
+                return {
+                    ...match,
+                    ...(progression.position === "home_team"
+                        ? { home_info: loser }
+                        : { away_info: loser }),
+                };
+            });
         }
 
         updateLocalMatches((match) => {
