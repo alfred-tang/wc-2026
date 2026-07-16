@@ -161,6 +161,18 @@ const useMatches = () => {
             };
         })
 
+        const { error: eliminatedError } = await supabase
+            .from("teams")
+            .update({
+                eliminated: true,
+            })
+            .eq("team_id", loser.team_id);
+
+        if (eliminatedError) {
+            console.log(eliminatedError);
+            return false;
+        }
+
         return true;
     };
 
